@@ -1,0 +1,204 @@
+<template>
+    <div class="modal fade" id="createRole"  data-backdrop="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{name}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+
+                    <div class="form-group">
+                        <label>Role Name</label>
+
+                        <input type="text" v-model="role.name" class="form-control" placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Your skills</label>
+                        <div class="selectgroup selectgroup-pills" >
+                            <label class="selectgroup-item" v-for="permission in permissions">
+                                <input type="checkbox" v-model="perm_roles[permission.id]"  class="selectgroup-input">
+                                <span class="selectgroup-button">{{permission.name}}</span>
+                            </label>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer" style = "padding-top: 0">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" @click="editRole(role.id)" v-if="editing">Update Role</button>
+                    <button type="button" @click="storeRole()" class="btn btn-primary" v-else>Create Role</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+
+
+    import ErrorBag from '../error_bag'
+
+    class Role{
+
+        constructor(role){
+
+            this.name = role.name || '';
+            this.permissions = role.permissions || [];
+        }
+
+    }
+
+    export default {
+        name: "StoreRole",
+
+        data(){
+
+            return{
+
+                editing: false,
+                role: new Role({}),
+                errors: new ErrorBag,
+                permissions: [],
+                perm_roles: []
+
+            }
+        },
+
+        created(){
+
+            // this.perm_roles = []
+        },
+
+        mounted(){
+
+
+            this.$parent.$on('create_role', (permissions) => {
+
+                this.editing = false;
+                this.role = new Role({});
+                this.perm_roles = [];
+                if (this.errors.hasErrors()) {
+                    this.errors.clearAll();
+                }
+                this.permissions = permissions;
+                $('#createRole').modal('show')
+
+
+            });
+
+            this.$parent.$on('edit_role', (role, permissions) => {
+
+                this.editing = true;
+                this.role = new Role(role);
+                this.role.id = role.id;
+                if (this.errors.hasErrors()) {
+                    this.errors.clearAll();
+                }
+                this.permissions = permissions;
+
+                this.perm_roles = [];
+
+                this.role.permissions.forEach((perm) => {
+
+                    this.perm_roles[perm.id] = true
+
+                });
+                $('#createRole').modal('show')
+
+
+            });
+
+
+        },
+
+        computed: {
+
+            name(){
+
+                return this.editing ? 'Edit Role' : 'Create Role'
+
+            }
+
+        },
+
+        methods: {
+
+            storeRole(){
+
+                const entries = Object.entries(this.perm_roles);
+                const values = [];
+                for (const [key, val] of entries) {
+                    if (val){
+
+                        values.push(key);
+
+                    }
+                }
+
+                console.log(values);
+
+                this.$http.post('/admin/role', {
+
+                    name: this.role.name,
+                    permissions: values
+
+                }).then(res => {
+
+                    this.$parent.$emit('add_role', res.data);
+                    console.log(res.data);
+
+                    $('#createRole').modal('hide')
+
+
+                }).catch(err => {
+
+                    console.log(err.response)
+                })
+
+            },
+
+            editRole(id){
+
+                const entries = Object.entries(this.perm_roles);
+                const values = [];
+                for (const [key, val] of entries) {
+
+                    if (val){
+
+                        values.push(key);
+
+                    }
+                }
+
+                console.log(values);
+
+                this.$http.put(`/admin/role/${id}`, {
+
+                    name: this.role.name,
+                    permissions: values
+
+                }).then(res => {
+
+                    this.$parent.$emit('update_role', res.data);
+                    console.log(res.data);
+                    $('#createRole').modal('hide')
+
+                })
+
+            }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>
