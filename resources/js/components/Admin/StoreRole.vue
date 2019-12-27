@@ -1,32 +1,38 @@
 <template>
-    <div class="modal fade" id="createRole"  data-backdrop="false">
+    <div class="modal fade" style="z-index:1000" id="createRole"  data-backdrop="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">{{name}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" >
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
                 <div class="modal-body">
 
-
                     <div class="form-group">
                         <label>Role Name</label>
 
-                        <input type="text" v-model="role.name" class="form-control" placeholder="">
+                        <input type="text" :class="{'is-invalid': errors.hasError('name')}"
+                               v-model="role.name" class="form-control" placeholder="">
+                        <div class="invalid-feedback" v-if="errors.hasError('name')">{{ errors.first('name') }}</div>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Your skills</label>
-                        <div class="selectgroup selectgroup-pills" >
+                        <label class="form-label">Attach Permissions</label>
+                        <div class="selectgroup selectgroup-pills" v-if ="permissions.length > 0" >
+                            <p style="color: #dc3545; font-size: 80%" v-if="errors.hasError('permissions')">Pls attach one or more permission</p>
+
                             <label class="selectgroup-item" v-for="permission in permissions">
-                                <input type="checkbox" v-model="perm_roles[permission.id]"  class="selectgroup-input">
+                                <input type="checkbox" :class="{'is-invalid': errors.hasError('permissions')}" v-model="perm_roles[permission.id]"  class="selectgroup-input">
                                 <span class="selectgroup-button">{{permission.name}}</span>
                             </label>
 
                         </div>
+
+                        <p v-else><em>No Permissions... Add <a href="/admin/permission">here<i class="fas  fa-plus-circle"></i></a></em> </p>
+
                     </div>
 
                 </div>
@@ -161,7 +167,12 @@
 
                 }).catch(err => {
 
-                    console.log(err.response)
+                    if (err.response && err.response.status == 422) {
+                        const errors = err.response.data.errors;
+                        this.errors.setErrors(errors);
+                        console.log(err.response)
+
+                    }
                 })
 
             },
@@ -179,7 +190,7 @@
                     }
                 }
 
-                console.log(values);
+                // console.log(values);
 
                 this.$http.put(`/admin/role/${id}`, {
 
@@ -192,6 +203,12 @@
                     console.log(res.data);
                     $('#createRole').modal('hide')
 
+                }).catch(err =>  {
+
+                    if (err.response && err.response.status == 422) {
+                        const errors = err.response.data.errors;
+                        this.errors.setErrors(errors);
+                    }
                 })
 
             }

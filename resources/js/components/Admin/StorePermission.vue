@@ -15,7 +15,10 @@
                         <div class="form-group">
                             <label>Permission Name</label>
 
-                            <input type="text" v-model="permission.name" class="form-control" placeholder="">
+                            <input type="text" :class="{'is-invalid': errors.hasError('name')}" v-model="permission.name"
+                                   class="form-control" placeholder="">
+                            <div class="invalid-feedback" v-if="errors.hasError('name')">{{ errors.first('name') }}</div>
+
                         </div>
 
                     </div>
@@ -110,7 +113,11 @@
 
                 }).catch(err => {
 
-                    console.log(err.response)
+                    if (err.response && err.response.status == 422) {
+                        const errors = err.response.data.errors;
+                        this.errors.setErrors(errors);
+                        console.log(err.response)
+                    }
                 })
 
             },
@@ -123,6 +130,12 @@
                     this.$parent.$emit('update_permission', res.data);
                     $('#createPermission').modal('hide')
 
+                }).catch(err => {
+
+                    if (err.response && err.response.status == 422) {
+                        const errors = err.response.data.errors;
+                        this.errors.setErrors(errors);
+                    }
                 })
 
             }

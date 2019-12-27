@@ -2012,7 +2012,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Roles",
@@ -2111,6 +2110,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //
 //
 //
+//
+//
+//
 
 
 var Permission = function Permission(permission) {
@@ -2167,7 +2169,13 @@ var Permission = function Permission(permission) {
 
         $('#createPermission').modal('hide');
       })["catch"](function (err) {
-        console.log(err.response);
+        if (err.response && err.response.status == 422) {
+          var errors = err.response.data.errors;
+
+          _this2.errors.setErrors(errors);
+
+          console.log(err.response);
+        }
       });
     },
     editPermission: function editPermission(id) {
@@ -2177,6 +2185,12 @@ var Permission = function Permission(permission) {
         _this3.$parent.$emit('update_permission', res.data);
 
         $('#createPermission').modal('hide');
+      })["catch"](function (err) {
+        if (err.response && err.response.status == 422) {
+          var errors = err.response.data.errors;
+
+          _this3.errors.setErrors(errors);
+        }
       });
     }
   }
@@ -2204,6 +2218,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2336,7 +2356,13 @@ var Role = function Role(role) {
         console.log(res.data);
         $('#createRole').modal('hide');
       })["catch"](function (err) {
-        console.log(err.response);
+        if (err.response && err.response.status == 422) {
+          var errors = err.response.data.errors;
+
+          _this2.errors.setErrors(errors);
+
+          console.log(err.response);
+        }
       });
     },
     editRole: function editRole(id) {
@@ -2353,9 +2379,9 @@ var Role = function Role(role) {
         if (val) {
           values.push(key);
         }
-      }
+      } // console.log(values);
 
-      console.log(values);
+
       this.$http.put("/admin/role/".concat(id), {
         name: this.role.name,
         permissions: values
@@ -2364,6 +2390,12 @@ var Role = function Role(role) {
 
         console.log(res.data);
         $('#createRole').modal('hide');
+      })["catch"](function (err) {
+        if (err.response && err.response.status == 422) {
+          var errors = err.response.data.errors;
+
+          _this3.errors.setErrors(errors);
+        }
       });
     }
   }
@@ -38150,6 +38182,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: { "is-invalid": _vm.errors.hasError("name") },
                 attrs: { type: "text", placeholder: "" },
                 domProps: { value: _vm.permission.name },
                 on: {
@@ -38160,7 +38193,13 @@ var render = function() {
                     _vm.$set(_vm.permission, "name", $event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _vm.errors.hasError("name")
+                ? _c("div", { staticClass: "invalid-feedback" }, [
+                    _vm._v(_vm._s(_vm.errors.first("name")))
+                  ])
+                : _vm._e()
             ])
           ]),
           _vm._v(" "),
@@ -38258,6 +38297,7 @@ var render = function() {
     "div",
     {
       staticClass: "modal fade",
+      staticStyle: { "z-index": "1000" },
       attrs: { id: "createRole", "data-backdrop": "false" }
     },
     [
@@ -38290,6 +38330,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: { "is-invalid": _vm.errors.hasError("name") },
                 attrs: { type: "text", placeholder: "" },
                 domProps: { value: _vm.role.name },
                 on: {
@@ -38300,72 +38341,109 @@ var render = function() {
                     _vm.$set(_vm.role, "name", $event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _vm.errors.hasError("name")
+                ? _c("div", { staticClass: "invalid-feedback" }, [
+                    _vm._v(_vm._s(_vm.errors.first("name")))
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
               _c("label", { staticClass: "form-label" }, [
-                _vm._v("Your skills")
+                _vm._v("Attach Permissions")
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "selectgroup selectgroup-pills" },
-                _vm._l(_vm.permissions, function(permission) {
-                  return _c("label", { staticClass: "selectgroup-item" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.perm_roles[permission.id],
-                          expression: "perm_roles[permission.id]"
-                        }
-                      ],
-                      staticClass: "selectgroup-input",
-                      attrs: { type: "checkbox" },
-                      domProps: {
-                        checked: Array.isArray(_vm.perm_roles[permission.id])
-                          ? _vm._i(_vm.perm_roles[permission.id], null) > -1
-                          : _vm.perm_roles[permission.id]
-                      },
-                      on: {
-                        change: function($event) {
-                          var $$a = _vm.perm_roles[permission.id],
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = null,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                _vm.$set(
-                                  _vm.perm_roles,
-                                  permission.id,
-                                  $$a.concat([$$v])
+              _vm.permissions.length > 0
+                ? _c(
+                    "div",
+                    { staticClass: "selectgroup selectgroup-pills" },
+                    [
+                      _vm.errors.hasError("permissions")
+                        ? _c(
+                            "p",
+                            {
+                              staticStyle: {
+                                color: "#dc3545",
+                                "font-size": "80%"
+                              }
+                            },
+                            [_vm._v("Pls attach one or more permission")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm._l(_vm.permissions, function(permission) {
+                        return _c(
+                          "label",
+                          { staticClass: "selectgroup-item" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.perm_roles[permission.id],
+                                  expression: "perm_roles[permission.id]"
+                                }
+                              ],
+                              staticClass: "selectgroup-input",
+                              class: {
+                                "is-invalid": _vm.errors.hasError("permissions")
+                              },
+                              attrs: { type: "checkbox" },
+                              domProps: {
+                                checked: Array.isArray(
+                                  _vm.perm_roles[permission.id]
                                 )
-                            } else {
-                              $$i > -1 &&
-                                _vm.$set(
-                                  _vm.perm_roles,
-                                  permission.id,
-                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                )
-                            }
-                          } else {
-                            _vm.$set(_vm.perm_roles, permission.id, $$c)
-                          }
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "selectgroup-button" }, [
-                      _vm._v(_vm._s(permission.name))
-                    ])
-                  ])
-                }),
-                0
-              )
+                                  ? _vm._i(
+                                      _vm.perm_roles[permission.id],
+                                      null
+                                    ) > -1
+                                  : _vm.perm_roles[permission.id]
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.perm_roles[permission.id],
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = null,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        _vm.$set(
+                                          _vm.perm_roles,
+                                          permission.id,
+                                          $$a.concat([$$v])
+                                        )
+                                    } else {
+                                      $$i > -1 &&
+                                        _vm.$set(
+                                          _vm.perm_roles,
+                                          permission.id,
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
+                                    }
+                                  } else {
+                                    _vm.$set(_vm.perm_roles, permission.id, $$c)
+                                  }
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "selectgroup-button" }, [
+                              _vm._v(_vm._s(permission.name))
+                            ])
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                : _c("p", [_vm._m(1)])
             ])
           ]),
           _vm._v(" "),
@@ -38428,10 +38506,26 @@ var staticRenderFns = [
       "button",
       {
         staticClass: "close",
-        attrs: { type: "button", "data-dismiss": "modal" }
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("em", [
+      _vm._v("No Permissions... Add "),
+      _c("a", { attrs: { href: "/admin/permission" } }, [
+        _vm._v("here"),
+        _c("i", { staticClass: "fas  fa-plus-circle" })
+      ])
+    ])
   }
 ]
 render._withStripped = true

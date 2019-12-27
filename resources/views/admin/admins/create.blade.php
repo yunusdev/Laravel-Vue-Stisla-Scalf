@@ -66,12 +66,17 @@
                             <div class="form-group">
                                 <label class="form-label">Attach Role(s)</label>
                                 <div class="selectgroup selectgroup-pills" >
-                                    @foreach($roles as $role)
+                                    @forelse($roles as $role)
                                         <label class="selectgroup-item" >
                                             <input type="checkbox" name="roles[]"  value="{{$role->id}}" class="selectgroup-input">
                                             <span class="selectgroup-button">{{$role->name}}</span>
                                         </label>
-                                    @endforeach
+
+                                        @empty
+
+                                        <p><em>No roles... Add <a href="{{route('role.index')}}">here<i class="fas  fa-plus-circle"></i></a></em> </p>
+
+                                    @endforelse
 
                                 </div>
                             </div>

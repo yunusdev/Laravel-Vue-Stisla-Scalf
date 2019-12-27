@@ -32,18 +32,6 @@ class RoleController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-
-        return view('admin.role.create', compact('permissions'));
-
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -57,6 +45,7 @@ class RoleController extends Controller
         $this->validate(request(), [
 
             'name' => 'required|unique:roles',
+            'permissions' => 'required'
 
         ]);
 
@@ -76,33 +65,6 @@ class RoleController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-        $role = Role::FindOrFail($id);
-
-        $permissions = Permission::all();
-
-
-        return view('admin.role.edit', compact('role', 'permissions'));
-    }
 
     /**
      * Update the specified resource in storage.

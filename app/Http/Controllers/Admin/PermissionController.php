@@ -27,16 +27,7 @@ class PermissionController extends Controller
         return view('admin.permission.index', compact('permissions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-        return view('admin.permission.create');
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -62,24 +53,7 @@ class PermissionController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Model\admin\Permission  $permission
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
 
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\admin\Permission  $permission
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //

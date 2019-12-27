@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-lg-6">
                             <a style="padding: 10px" href="{{route('admins.create')}}" class="col-sm-6 col-xs-12 pull-right btn btn-primary">
-                                <i class="fas fa-user-plus" style="padding-right: 10px"></i>Add New Admins
+                                <i class="fas fa-user-plus" style="padding-right: 10px"></i>Add New Admin
                             </a>
                         </div>
 
