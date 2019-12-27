@@ -2,6 +2,8 @@
 
 - `composer install`
 
+- `npm install`
+
 - `cp .env.example .env` _(Then setup ur .env file)_
 
 - `php artisan key:generate`
@@ -10,12 +12,14 @@
 
 - `php artisan db:seed` _(Seed some files to your db)_
 
+- `php artisan serve` _(Run Project)_
+
 - Admin user details
 
   - login at   `/admin/login`
   - email = `john@gmail.com`
   - password = `john123`
 
--  Register new user at `admin/admins/create`
+-  You can Register new admin user at `admin/admins/create`
 
 

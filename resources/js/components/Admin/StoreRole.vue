@@ -21,8 +21,9 @@
 
                     <div class="form-group">
                         <label class="form-label">Attach Permissions</label>
+                        <p style="color: #dc3545; font-size: 80%" v-if="errors.hasError('permissions')">Pls attach one or more permission</p>
+
                         <div class="selectgroup selectgroup-pills" v-if ="permissions.length > 0" >
-                            <p style="color: #dc3545; font-size: 80%" v-if="errors.hasError('permissions')">Pls attach one or more permission</p>
 
                             <label class="selectgroup-item" v-for="permission in permissions">
                                 <input type="checkbox" :class="{'is-invalid': errors.hasError('permissions')}" v-model="perm_roles[permission.id]"  class="selectgroup-input">

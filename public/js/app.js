@@ -2268,6 +2268,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //
 //
 //
+//
 
 
 var Role = function Role(role) {
@@ -38355,93 +38356,79 @@ var render = function() {
                 _vm._v("Attach Permissions")
               ]),
               _vm._v(" "),
+              _vm.errors.hasError("permissions")
+                ? _c(
+                    "p",
+                    { staticStyle: { color: "#dc3545", "font-size": "80%" } },
+                    [_vm._v("Pls attach one or more permission")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
               _vm.permissions.length > 0
                 ? _c(
                     "div",
                     { staticClass: "selectgroup selectgroup-pills" },
-                    [
-                      _vm.errors.hasError("permissions")
-                        ? _c(
-                            "p",
+                    _vm._l(_vm.permissions, function(permission) {
+                      return _c("label", { staticClass: "selectgroup-item" }, [
+                        _c("input", {
+                          directives: [
                             {
-                              staticStyle: {
-                                color: "#dc3545",
-                                "font-size": "80%"
-                              }
-                            },
-                            [_vm._v("Pls attach one or more permission")]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm._l(_vm.permissions, function(permission) {
-                        return _c(
-                          "label",
-                          { staticClass: "selectgroup-item" },
-                          [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.perm_roles[permission.id],
-                                  expression: "perm_roles[permission.id]"
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.perm_roles[permission.id],
+                              expression: "perm_roles[permission.id]"
+                            }
+                          ],
+                          staticClass: "selectgroup-input",
+                          class: {
+                            "is-invalid": _vm.errors.hasError("permissions")
+                          },
+                          attrs: { type: "checkbox" },
+                          domProps: {
+                            checked: Array.isArray(
+                              _vm.perm_roles[permission.id]
+                            )
+                              ? _vm._i(_vm.perm_roles[permission.id], null) > -1
+                              : _vm.perm_roles[permission.id]
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.perm_roles[permission.id],
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    _vm.$set(
+                                      _vm.perm_roles,
+                                      permission.id,
+                                      $$a.concat([$$v])
+                                    )
+                                } else {
+                                  $$i > -1 &&
+                                    _vm.$set(
+                                      _vm.perm_roles,
+                                      permission.id,
+                                      $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1))
+                                    )
                                 }
-                              ],
-                              staticClass: "selectgroup-input",
-                              class: {
-                                "is-invalid": _vm.errors.hasError("permissions")
-                              },
-                              attrs: { type: "checkbox" },
-                              domProps: {
-                                checked: Array.isArray(
-                                  _vm.perm_roles[permission.id]
-                                )
-                                  ? _vm._i(
-                                      _vm.perm_roles[permission.id],
-                                      null
-                                    ) > -1
-                                  : _vm.perm_roles[permission.id]
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.perm_roles[permission.id],
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = null,
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.perm_roles,
-                                          permission.id,
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.perm_roles,
-                                          permission.id,
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.perm_roles, permission.id, $$c)
-                                  }
-                                }
+                              } else {
+                                _vm.$set(_vm.perm_roles, permission.id, $$c)
                               }
-                            }),
-                            _vm._v(" "),
-                            _c("span", { staticClass: "selectgroup-button" }, [
-                              _vm._v(_vm._s(permission.name))
-                            ])
-                          ]
-                        )
-                      })
-                    ],
-                    2
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "selectgroup-button" }, [
+                          _vm._v(_vm._s(permission.name))
+                        ])
+                      ])
+                    }),
+                    0
                   )
                 : _c("p", [_vm._m(1)])
             ])

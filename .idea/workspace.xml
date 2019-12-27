@@ -2,38 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33fd10b8-4201-40e0-be1a-b246c3030c45" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PermissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/PermissionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/RoleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/RoleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/AdminProfilePic/1529932498avatar.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/AdminProfilePic/1529940077avatar3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/AdminProfilePic/1529940111avatar2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/AdminProfilePic/1529940325avatar5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/AdminProfilePic/1529942558avatar3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/AdminProfilePic/1531222925user5-128x128.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/AdminProfilePic/1531223048user5-128x128.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/AdminProfilePic/1577359829avatar-3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/AdminProfilePic/1577359897avatar-3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/AdminProfilePic/1577359928avatar-3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/AdminProfilePic/1577359976avatar-3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/AdminProfilePic/1577360776avatar-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/AdminProfilePic/1577361319avatar-5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/AdminProfilePic/1577361364avatar-4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/AdminProfilePic/1577362315avatar-4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/Roles.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/Roles.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/StorePermission.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/StorePermission.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/StoreRole.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/StoreRole.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/admins/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/admins/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/admins/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/admins/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/layouts/base.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/layouts/base.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/layouts/head.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/layouts/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/layouts/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/layouts/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/layouts/sidebar.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,13 +33,14 @@
         <counts>
           <entry key="artisan" value="2" />
           <entry key="css" value="4" />
+          <entry key="env" value="1" />
           <entry key="gitignore" value="1" />
           <entry key="html" value="1" />
           <entry key="jpg" value="1" />
           <entry key="js" value="14" />
-          <entry key="json" value="8" />
+          <entry key="json" value="9" />
           <entry key="lock" value="1" />
-          <entry key="md" value="1" />
+          <entry key="md" value="2" />
           <entry key="php" value="87" />
           <entry key="vue" value="17" />
           <entry key="yml" value="1" />
@@ -77,13 +48,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key=".env file" value="1" />
           <entry key="Blade" value="43" />
           <entry key="CSS" value="4" />
           <entry key="HTML" value="1" />
           <entry key="Image" value="1" />
-          <entry key="JSON" value="9" />
+          <entry key="JSON" value="10" />
           <entry key="JavaScript" value="14" />
-          <entry key="Markdown" value="1" />
+          <entry key="Markdown" value="2" />
           <entry key="PHP" value="46" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="Vue.js" value="17" />
@@ -96,9 +68,9 @@
           <entry key="css" value="6" />
           <entry key="js" value="79" />
           <entry key="json" value="4" />
-          <entry key="md" value="83" />
+          <entry key="md" value="151" />
           <entry key="php" value="2318" />
-          <entry key="vue" value="3165" />
+          <entry key="vue" value="3236" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -107,9 +79,9 @@
           <entry key="CSS" value="6" />
           <entry key="JSON" value="4" />
           <entry key="JavaScript" value="80" />
-          <entry key="Markdown" value="83" />
+          <entry key="Markdown" value="151" />
           <entry key="PHP" value="888" />
-          <entry key="Vue.js" value="3164" />
+          <entry key="Vue.js" value="3235" />
         </counts>
       </usages-collector>
     </session>
@@ -146,8 +118,42 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/js/components/Admin/StoreRole.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="25" column="72" selection-start-line="25" selection-start-column="72" selection-end-line="25" selection-end-column="72" />
+            <state relative-caret-position="51">
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.env">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/readme.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="289">
+                <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/composer.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -156,7 +162,7 @@
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/RoleController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="37">
-              <caret line="47" column="21" lean-forward="true" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="24" />
+              <caret line="47" column="21" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -256,13 +262,13 @@
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
         <option value="$PROJECT_DIR$/database/seeds/AdminPhotoSeederTable.php" />
-        <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/resources/views/admin/admins/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/admins/create.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/PermissionController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/RoleController.php" />
         <option value="$PROJECT_DIR$/resources/js/components/Admin/Roles.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/Admin/StorePermission.vue" />
+        <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/resources/js/components/Admin/StoreRole.vue" />
       </list>
     </option>
@@ -396,38 +402,6 @@
               <item name="StislaLaravelScalf" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="StislaLaravelScalf" type="b2602c69:ProjectViewProjectNode" />
-              <item name="StislaLaravelScalf" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="StislaLaravelScalf" type="b2602c69:ProjectViewProjectNode" />
-              <item name="StislaLaravelScalf" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="StislaLaravelScalf" type="b2602c69:ProjectViewProjectNode" />
-              <item name="StislaLaravelScalf" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="StislaLaravelScalf" type="b2602c69:ProjectViewProjectNode" />
-              <item name="StislaLaravelScalf" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="StislaLaravelScalf" type="b2602c69:ProjectViewProjectNode" />
-              <item name="StislaLaravelScalf" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Admin" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -482,12 +456,12 @@
       <workItem from="1577349161103" duration="9737000" />
       <workItem from="1577363011645" duration="2362000" />
       <workItem from="1577374430108" duration="4153000" />
-      <workItem from="1577451641894" duration="6455000" />
+      <workItem from="1577451641894" duration="8712000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60846000" />
+    <option name="totallyTimeSpent" value="63103000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -530,13 +504,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/home.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="23" selection-end-line="78" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Documents/stisla-master/pages/blank.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -552,13 +519,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.styleci.yml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="34" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/app.js">
       <provider selected="true" editor-type-id="text-editor" />
@@ -807,27 +767,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/readme.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="306">
-            <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="33" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/admins/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="79" selection-start-line="79" selection-end-line="79" />
         </state>
       </provider>
     </entry>
@@ -862,14 +805,49 @@
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/RoleController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="37">
-          <caret line="47" column="21" lean-forward="true" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="24" />
+          <caret line="47" column="21" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="289">
+            <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/admins/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="79" selection-start-line="79" selection-end-line="79" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/Admin/StoreRole.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="25" column="72" selection-start-line="25" selection-start-column="72" selection-end-line="25" selection-end-column="72" />
+        <state relative-caret-position="51">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
