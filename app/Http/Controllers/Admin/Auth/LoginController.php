@@ -30,10 +30,6 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/admin/home';
 
-    /**
-     * Create a new controller instance.
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|void
-     */
     public function showLoginForm()
     {
         return view('admin.login');
@@ -56,8 +52,6 @@ class LoginController extends Controller
     {
 
         $admin = Admin::where('email', $request->email)->first();
-
-        // if (count($admin)){
 
         if ($admin){
 

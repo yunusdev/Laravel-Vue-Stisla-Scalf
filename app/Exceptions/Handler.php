@@ -2,8 +2,8 @@
 
 namespace App\Exceptions;
 
-
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Arr;
 use Throwable;
 use Illuminate\Auth\AuthenticationException;
 
@@ -58,7 +58,7 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        $guard = array_get($exception->guards(), 0);
+        $guard = Arr::get($exception->guards(), 0);
 
         switch ($guard){
 

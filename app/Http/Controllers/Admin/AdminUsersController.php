@@ -46,9 +46,7 @@ class AdminUsersController extends Controller
 
         $this->validate(request(),[
 
-            'phone' => 'required|numeric',
             'name' => 'required|string|max:255',
-            'picture' => 'required',
             'email' => 'required|string|email|max:255|unique:admins',
             'password' => 'required|string|min:6|confirmed',
 
@@ -59,8 +57,6 @@ class AdminUsersController extends Controller
         $admin = new Admin;
 
         $admin->name = $request->name;
-
-        $admin->phone = $request->phone;
 
         $admin->email = $request->email;
 
@@ -101,7 +97,6 @@ class AdminUsersController extends Controller
 
         $this->validate(request(), [
 
-            'phone' => 'required|numeric',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
 //            'password' => 'required|string|min:6|confirmed',
@@ -111,22 +106,17 @@ class AdminUsersController extends Controller
 
         $request->status == 1 ?: $request['status'] = 0;
 
-//        $admin = Admin::find($id)->update($request->except('_token', '_method','role'));
-//
         $input = $request->all();
 
         $admin = Admin::findOrFail($id);
 
         $admin->name = $request->name;
 
-        $admin->phone = $request->phone;
-
         $admin->email = $request->email;
 
 //        $admin->password = bcrypt($request->password);
 
         $admin->status = $request->status;
-
 
         $admin->save();
 
