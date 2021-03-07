@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "izitoast": "^1.4.0",
-        "sweetalert": "^2.1.2"
+        "sweetalert": "^2.1.2",
+        "vue-multiselect": "^2.1.6"
     }
 }

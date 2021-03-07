@@ -25,7 +25,7 @@
 
         .fa-edit{
 
-            color: #191d21;
+            color: #232B35;
             cursor: pointer;
             font-size: 20px !important;
 

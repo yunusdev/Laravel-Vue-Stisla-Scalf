@@ -76,7 +76,7 @@
         </li>
 
         <li style="margin-right: 20px;">
-            <a href="{{ route('admin.logout') }}" class="dropdown-item has-icon text-center btn btn-danger "><i class="fas fa-sign-out-alt"></i> Logout
+           <a href="{{ route('admin.logout') }}" class="dropdown-item has-icon text-center border btn btn-outline-white "><i class="fas fa-sign-out-alt"></i> Logout
             </a>
         </li>
     </ul>

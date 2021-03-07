@@ -49,6 +49,10 @@ Vue.component('store-role', require('./components/Admin/StoreRole.vue').default)
 Vue.component('store-permission', require('./components/Admin/StorePermission.vue').default);
 Vue.component('roles', require('./components/Admin/Roles.vue').default);
 Vue.component('permissions', require('./components/Admin/Permissions.vue').default);
+Vue.component('categories', require('./components/Admin/Categories.vue').default);
+Vue.component('store-category', require('./components/Admin/StoreCategory.vue').default);
+Vue.component('sub-categories', require('./components/Admin/SubCategories.vue').default);
+Vue.component('store-sub-category', require('./components/Admin/StoreSubCategory.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

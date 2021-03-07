@@ -8,12 +8,15 @@
 
 namespace  App\Models;
 
+use App\Traits\uuids;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Model extends Eloquent
 {
     //
-    protected $guarded = [];
+    use uuids;
 
+    protected $guarded = [];
+    public $incrementing = false;
 
 }

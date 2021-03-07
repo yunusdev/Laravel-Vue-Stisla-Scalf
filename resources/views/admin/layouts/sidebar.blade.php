@@ -1,10 +1,10 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{route('admin.home')}}">Stisla</a>
+            <a class="" style="" href="{{route('admin.home')}}">MY WEARS</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            <a href="index.html">MY</a>
         </div>
         @php
             $current_url = url()->current();
@@ -20,9 +20,15 @@
             <li class="menu-header">Starter</li>
             <li class="{{$base_url . '/admin/users' === $current_url ? 'active' : ''}}"><a class="nav-link" href="{{route('users.index')}}"><i class="fas fa-user"></i> <span>Users</span></a></li>
 
+
+            <li class="{{$base_url . '/admin/categories' === $current_url ? 'active' : ''}}"><a class="nav-link" href="{{route('categories.index')}}"><i class="fas fa-user"></i> <span>Categories</span></a></li>
+            <li class="{{$base_url . '/admin/sub-categories' === $current_url ? 'active' : ''}}"><a class="nav-link" href="{{route('sub-categories.index', 'fff')}}"><i class="fas fa-user"></i> <span>Sub Categories</span></a></li>
+
+
             <li class="menu-header">AUTHORIZING</li>
             <li class="{{$base_url . '/admin/role' === $current_url ? 'active' : ''}}"><a class="nav-link" href="{{route('role.index')}}"><i class="fas fa-pencil-ruler"></i> <span>Roles</span></a></li>
             <li class="{{$base_url . '/admin/permission' === $current_url ? 'active' : ''}}"><a class="nav-link" href="{{route('permission.index')}}"><i class="fas fa-pencil-ruler"></i> <span>Permissions</span></a></li>
+
         </ul>
 
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">

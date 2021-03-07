@@ -64,6 +64,21 @@ Route::group(['prefix'=>'admin'], function() {
     );
 
     Route::resource(
+        '/categories',
+        \App\Http\Controllers\Admin\CategoriesController::class,
+    );
+
+    Route::get(
+        '/sub-categories',
+        [\App\Http\Controllers\Admin\SubCategoriesController::class, 'index']
+    )->name('sub-categories.index');
+
+    Route::resource(
+        '/{category}/sub-categories',
+        \App\Http\Controllers\Admin\SubCategoriesController::class,
+    )->except('index');
+
+    Route::resource(
         '/permission',
         \App\Http\Controllers\Admin\PermissionController::class,
     );
