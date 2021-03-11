@@ -33,17 +33,6 @@ Vue.mixin({
         }
     }
 });
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('store-role', require('./components/Admin/StoreRole.vue').default);
 Vue.component('store-permission', require('./components/Admin/StorePermission.vue').default);
@@ -53,11 +42,51 @@ Vue.component('categories', require('./components/Admin/Categories.vue').default
 Vue.component('store-category', require('./components/Admin/StoreCategory.vue').default);
 Vue.component('sub-categories', require('./components/Admin/SubCategories.vue').default);
 Vue.component('store-sub-category', require('./components/Admin/StoreSubCategory.vue').default);
+Vue.component('sub-categories', require('./components/Admin/SubCategories.vue').default);
+
+Vue.component('products', require('./components/Admin/Products.vue').default);
+Vue.component('store-product', require('./components/Admin/StoreProduct.vue').default);
+Vue.component('view-product', require('./components/Admin/ViewProduct.vue').default);
+
+Vue.component('coupons', require('./components/Admin/Coupons.vue').default);
+Vue.component('store-coupon', require('./components/Admin/StoreCoupon.vue').default);
+
+Vue.component('nav-bar', require('./components/User/Layout/Navbar.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+Vue.filter('formatDate', function(value, format = 'LLLL') {
+    if (value) {
+        return moment(String(value)).format(format)
+    }
+})
+
+Vue.filter('formatMoney', function (amount, decimalCount = 2, decimal = ".", thousands = ",") {
+
+    decimalCount = Math.abs(decimalCount);
+    decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+    const negativeSign = amount < 0 ? "-" : "";
+
+    let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+    let j = (i.length > 3) ? i.length % 3 : 0;
+
+    return negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+});
+
+
+Vue.filter('formatDate2', function(value, format = 'LL') {
+    if (value) {
+        return moment(String(value)).format(format)
+    }
+})
+
+
+import Vuex from 'vuex'
+Vue.use(Vuex)
 
 const app = new Vue({
     el: '#app',

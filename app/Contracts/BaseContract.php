@@ -69,12 +69,15 @@ interface BaseContract
      */
     public function findBy(array $data);
 
+    public function findByWhere(array $data, array $relationship = []);
+
     /**
      * Find one based on a different column
      * @param array $data
+     * @param array $relationship
      * @return mixed
      */
-    public function findOneBy(array $data);
+    public function findOneBy(array $data, array $relationship = []);
 
     /**
      * Find one based on a different column or through exception

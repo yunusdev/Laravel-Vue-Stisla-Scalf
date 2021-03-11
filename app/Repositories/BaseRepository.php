@@ -43,11 +43,12 @@ class BaseRepository implements BaseContract
      * @param array $columns
      * @param string $orderBy
      * @param string $sortBy
+     * @param array $relationship
      * @return mixed
      */
-    public function all($columns = array('*'), string $orderBy = 'id', string $sortBy = 'asc')
+    public function all($columns = array('*'), string $orderBy = 'created_at', string $sortBy = 'desc', array $relationship = [])
     {
-        return $this->model->orderBy($orderBy, $sortBy)->get($columns);
+        return $this->model->orderBy($orderBy, $sortBy)->with($relationship)->get($columns);
     }
 
     /**
@@ -100,18 +101,19 @@ class BaseRepository implements BaseContract
         return $this->model->where($data)->paginate();
     }
 
-    public function findByWhere(array $data)
+    public function findByWhere(array $data, array $relationship = [])
     {
-        return $this->model->where($data)->get();
+        return $this->model->where($data)->with($relationship)->latest()->get();
     }
 
     /**
      * @param array $data
+     * @param array $relationship
      * @return mixed
      */
-    public function findOneBy(array $data)
+    public function findOneBy(array $data, array $relationship = [])
     {
-        return $this->model->where($data)->first();
+        return $this->model->where($data)->with($relationship)->first();
     }
 
     /**

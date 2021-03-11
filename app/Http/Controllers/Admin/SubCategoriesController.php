@@ -7,27 +7,42 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Repositories\CategoryRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class SubCategoriesController extends Controller
 {
-    protected $subCategoryRepository;
-    protected $categoryRepository;
+    protected $subCategoryRepository, $categoryRepository, $productRepository;
 
-    public function __construct(SubCategoryContract $subCategoryRepository, CategoryRepository $categoryRepository)
+    public function __construct(SubCategoryContract $subCategoryRepository,
+                                CategoryRepository $categoryRepository, ProductRepository $productRepository)
     {
 
         $this->subCategoryRepository = $subCategoryRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->productRepository = $productRepository;
 
     }
 
-    public function index()
+    public function getAll()
     {
         $data['categories'] = $this->categoryRepository->getCategories();
         $data['sub_categories'] = $this->subCategoryRepository->getSubCategories();
         return view('admin.categories.sub_categories')->with($data);
+    }
+
+    public function getProducts($subCategorySlug)
+    {
+        $subCategory = $this->subCategoryRepository->getSubCategoryBy(['slug' => $subCategorySlug]);
+        $data['title'] = 'Sub Category (' . $subCategory->name . ') - Products';
+        $data['products'] = $this->productRepository->findByWhere(['sub_category_id' => $subCategory->id], ['category', 'subCategory']);
+        return view('admin.products.index')->with($data);
+    }
+
+    public function index(Category $category)
+    {
+        return $this->subCategoryRepository->getCategorySubCategories($category->id);
     }
 
     public function store(Request $request, Category $category)

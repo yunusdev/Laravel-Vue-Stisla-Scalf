@@ -6,6 +6,10 @@ interface SubCategoryContract
 {
     public function getSubCategories();
 
+    public function getSubCategoryBy(array $params);
+
+    public function getCategorySubCategories(string $id);
+
     public function storeSubCategory(array $params);
 
     public function updateSubCategory(array $params, string $id);

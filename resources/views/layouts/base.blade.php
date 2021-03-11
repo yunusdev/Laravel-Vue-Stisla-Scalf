@@ -28,22 +28,26 @@
 <!-- Body-->
 <body>
 
-{{--HEADER--}}
+    <div id="app">
 
-@include('layouts.header')
+        {{--@include('layouts.header')--}}
+        <nav-bar></nav-bar>
 
-<!-- Off-Canvas Wrapper-->
-<div class="offcanvas-wrapper">
-    <!-- Page Content-->
-    @yield('content')
+        <div class="offcanvas-wrapper">
+            <!-- Page Content-->
+            @yield('content')
 
-    @include('layouts.footer')
-</div>
+            @include('layouts.footer')
+        </div>
+
+    </div>
 <!-- Back To Top Button--><a class="scroll-to-top-btn" href="#"><i class="icon-arrow-up"></i></a>
 <!-- Backdrop-->
 <div class="site-backdrop"></div>
 <!-- JavaScript (jQuery) libraries, plugins and custom scripts-->
 <script src="js/vendor.min.js"></script>
 <script src="js/scripts.min.js"></script>
+<script src="{{asset('js/app.js')}}"></script>
+
 </body>
 </html>

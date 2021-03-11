@@ -2,7 +2,7 @@
 
 
 @section('title')
-    Categories
+{{$title}}
 @endsection
 
 @section('styles')
@@ -15,7 +15,7 @@
 @section('content')
 
     <div class="section-header">
-        <h1>Categories</h1>
+        <h1>{{$title}}</h1>
     </div>
 
     <div class="section-body" style="">
@@ -26,7 +26,7 @@
 
                 <div class="card" style="padding: 20px">
 
-                    <categories raw_categories = "{{$categories}}"></categories>
+                    <products raw_products="{{$products}}"></products>
 
                 </div>
 
@@ -41,10 +41,8 @@
 
 @section('scripts')
 
-
     <script src="{{asset('admin/datatables/jquery.dataTables.js')}}"></script>
     <script src="{{asset('admin/datatables/dataTables.bootstrap4.js')}}"></script>
-
     <script>
         $(function () {
             $("#example1").DataTable();

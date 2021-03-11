@@ -20,6 +20,9 @@ class CreateSubCategoriesTable extends Migration
             $table->string('slug');
             $table->string('description')->nullable();
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+
         });
     }
 

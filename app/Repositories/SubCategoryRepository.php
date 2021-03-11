@@ -19,6 +19,20 @@ class SubCategoryRepository extends BaseRepository implements SubCategoryContrac
         return $this->model->with('category')->latest()->get();
     }
 
+    public function getSubCategoryBy(array $data)
+    {
+        return $this->findOneBy($data);
+
+    }
+
+
+    public function getCategorySubCategories(string $id)
+    {
+        return $this->model->where('category_id', $id)->with('category')->latest()->get();
+
+    }
+
+
     public function storeSubCategory(array $params)
     {
         return $this->create($params);

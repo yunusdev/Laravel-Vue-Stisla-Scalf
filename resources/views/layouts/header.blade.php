@@ -1,4 +1,3 @@
-<!-- Off-Canvas Category Menu-->
 <div class="offcanvas-container" id="shop-categories">
     <div class="offcanvas-header">
         <h3 class="offcanvas-title">Shop Categories</h3>
@@ -71,13 +70,14 @@
         </ul>
     </nav>
 </div>
-<!-- Off-Canvas Mobile Menu-->
-<div class="offcanvas-container" id="mobile-menu"><a class="account-link" href="account-orders.html">
+<div class="offcanvas-container" id="mobile-menu">
+    <a class="account-link" href="account-orders.html">
         <div class="user-ava"><img src="img/account/user-ava-md.jpg" alt="Daniel Adams">
         </div>
         <div class="user-info">
             <h6 class="user-name">Daniel Adams</h6><span class="text-sm text-white opacity-60">290 Reward points</span>
-        </div></a>
+        </div>
+    </a>
     <nav class="offcanvas-menu">
         <ul class="menu">
             <li class="has-children active"><span><a href="index.html"><span>Home</span></a><span class="sub-menu-toggle"></span></span>
@@ -247,7 +247,6 @@
         </ul>
     </nav>
 </div>
-<!-- Topbar-->
 <div class="topbar">
     <div class="topbar-column"><a class="hidden-md-down" href="mailto:support@unishop.com"><i class="icon-mail"></i>&nbsp; support@unishop.com</a><a class="hidden-md-down" href="tel:00331697720"><i class="icon-bell"></i>&nbsp; 00 33 169 7720</a><a class="social-button sb-facebook shape-none sb-dark" href="#" target="_blank"><i class="socicon-facebook"></i></a><a class="social-button sb-twitter shape-none sb-dark" href="#" target="_blank"><i class="socicon-twitter"></i></a><a class="social-button sb-instagram shape-none sb-dark" href="#" target="_blank"><i class="socicon-instagram"></i></a><a class="social-button sb-pinterest shape-none sb-dark" href="#" target="_blank"><i class="socicon-pinterest"></i></a>
     </div>
@@ -267,8 +266,6 @@
         </div>
     </div>
 </div>
-<!-- Navbar-->
-<!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
 <header class="navbar navbar-sticky">
     <!-- Search-->
     <form class="site-search" method="get">

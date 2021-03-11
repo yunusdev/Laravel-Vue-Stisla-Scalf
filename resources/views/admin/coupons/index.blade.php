@@ -2,7 +2,7 @@
 
 
 @section('title')
-    Categories
+    Coupons
 @endsection
 
 @section('styles')
@@ -15,7 +15,7 @@
 @section('content')
 
     <div class="section-header">
-        <h1>Categories</h1>
+        <h1>Coupons</h1>
     </div>
 
     <div class="section-body" style="">
@@ -26,7 +26,7 @@
 
                 <div class="card" style="padding: 20px">
 
-                    <categories raw_categories = "{{$categories}}"></categories>
+                    <coupons raw_coupons = "{{$coupons}}"></coupons>
 
                 </div>
 

@@ -19,6 +19,12 @@ class CategoryRepository extends BaseRepository implements CategoryContract
         return $this->all();
     }
 
+    public function getCategoryBy(array $data)
+    {
+        return $this->findOneBy($data);
+    }
+
+
     public function storeCategory(array $params)
     {
         return $this->create($params);

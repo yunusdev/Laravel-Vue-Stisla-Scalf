@@ -14,6 +14,7 @@
                 <tr>
                     <th>No</th>
                     <th>Category Name</th>
+                    <th>View Products</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -22,6 +23,7 @@
                 <tr v-for="category, key in categories">
                     <td>{{key + 1}}</td>
                     <td>{{category.name}}</td>
+                    <td><a :href="`/admin/categories/${category.slug}/products`"><i class="text-center fas fa-2x fa-list"></i></a></td>
                     <td><a @click="editCategory(category)"><i class="text-center fas fa-edit"></i></a></td>
                     <td><a @click="deleteCategory(category.id, key)"><span class="text-center fas fa-trash" ></span></a></td>
                 </tr>
@@ -30,6 +32,7 @@
                 <tr>
                     <th>No</th>
                     <th>Category Name</th>
+                    <th>View Products</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
