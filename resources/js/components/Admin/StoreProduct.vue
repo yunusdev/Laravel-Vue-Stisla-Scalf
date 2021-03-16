@@ -309,7 +309,7 @@ export default {
                 this.disabled = false;
                 this.notifSuceess('Product Created Successfully!!!')
 
-                window.location = '/admin/products'
+                // window.location = '/admin/products'
                 console.log(res.data)
 
             }).catch(err => {

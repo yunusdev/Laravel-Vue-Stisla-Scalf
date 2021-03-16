@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Contracts\CategoryContract;
+use App\Contracts\ProductContract;
 use App\Contracts\SubCategoryContract;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -16,7 +18,7 @@ class SubCategoriesController extends Controller
     protected $subCategoryRepository, $categoryRepository, $productRepository;
 
     public function __construct(SubCategoryContract $subCategoryRepository,
-                                CategoryRepository $categoryRepository, ProductRepository $productRepository)
+                                CategoryContract $categoryRepository, ProductContract $productRepository)
     {
 
         $this->subCategoryRepository = $subCategoryRepository;
@@ -36,7 +38,7 @@ class SubCategoriesController extends Controller
     {
         $subCategory = $this->subCategoryRepository->getSubCategoryBy(['slug' => $subCategorySlug]);
         $data['title'] = 'Sub Category (' . $subCategory->name . ') - Products';
-        $data['products'] = $this->productRepository->findByWhere(['sub_category_id' => $subCategory->id], ['category', 'subCategory']);
+        $data['products'] = $this->productRepository->getSubCategoryProducts($subCategory->id, ['category', 'subCategory']);
         return view('admin.products.index')->with($data);
     }
 

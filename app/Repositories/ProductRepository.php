@@ -27,11 +27,48 @@ class ProductRepository extends BaseRepository implements ProductContract
         return $this->all(['*'], 'created_at', 'desc',  ['category', 'subCategory']);
     }
 
+    public function getTopCategoryProducts(string $categoryId, int $num = 3)
+    {
+        return $this->model->where('category_id', $categoryId)->latest()->take($num)->get();
+
+    }
+
+    public function incrementProductViewCount(Product $product)
+    {
+
+        $product->views_count++;
+        $product->save();
+
+    }
+
+    public function getRelatedProducts(Product $product, int $num = 6)
+    {
+        return $this->model->where('id', '!=', $product->id)->where('sub_category_id', $product->sub_category_id)
+            ->latest()->take($num)->get();
+
+    }
+
+    public function getTrendingProducts(int $num = 6)
+    {
+        return $this->model->orderBy('views_count', 'desc')->take($num)->get();
+
+    }
+
     public function getProductsBy(array $data, array $relationship = [])
     {
         return $this->findByWhere($data, $relationship);
     }
 
+    public function getCategoryProducts(string $categoryId, array $relationship = [])
+    {
+        return $this->findByWhere(['category_id' => $categoryId], $relationship);
+    }
+
+    public function getSubCategoryProducts(string $subCategoryId, array $relationship = [])
+    {
+        return $this->findByWhere(['sub_category_id' => $subCategoryId], $relationship);
+
+    }
 
     public function getProductById(string $id)
     {
@@ -61,12 +98,13 @@ class ProductRepository extends BaseRepository implements ProductContract
         return $params;
     }
 
-    private function handleArrayImageUploads($images, $productId)
+    private function handleArrayImageUploads($images, $productId, $categoryId)
     {
         foreach ($images as $image) {
             $img = UploadImage::upload($image, 'products');
             $this->productImageRepository->storeProductImage([
                 'product_id' => $productId,
+                'category_id' => $categoryId,
                 'path' => $img
             ]);
         }
@@ -87,7 +125,7 @@ class ProductRepository extends BaseRepository implements ProductContract
             $params['slug'] = Str::slug($params['name'].'-'.$params['code']);
 
             $product = $this->create($params);
-            $this->handleArrayImageUploads($images, $product->id);
+            $this->handleArrayImageUploads($images, $product->id, $product->category_id);
 
             return $product;
 //            return $this->create($params);

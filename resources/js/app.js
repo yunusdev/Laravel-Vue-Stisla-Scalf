@@ -52,6 +52,9 @@ Vue.component('coupons', require('./components/Admin/Coupons.vue').default);
 Vue.component('store-coupon', require('./components/Admin/StoreCoupon.vue').default);
 
 Vue.component('nav-bar', require('./components/User/Layout/Navbar.vue').default);
+Vue.component('shop', require('./components/User/Shop/Index.vue').default);
+Vue.component('product-view', require('./components/User/Shop/ProductView.vue').default);
+Vue.component('trending-products', require('./components/User/TrendingProducts.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Contracts\CategoryContract;
+use App\Contracts\ProductContract;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -14,7 +14,7 @@ class CategoriesController extends Controller
 
     protected $categoryRepository, $productRepository;
 
-    public function __construct(CategoryContract $categoryRepository,  ProductRepository $productRepository)
+    public function __construct(CategoryContract $categoryRepository,  ProductContract $productRepository)
     {
 
        $this->categoryRepository = $categoryRepository;
@@ -32,7 +32,7 @@ class CategoriesController extends Controller
     {
         $category = $this->categoryRepository->getCategoryBy(['slug' => $categorySlug]);
         $data['title'] = 'Category (' . $category->name . ') - Products';
-        $data['products'] = $this->productRepository->findByWhere(['category_id' => $category->id], ['category', 'subCategory']);
+        $data['products'] = $this->productRepository->getCategoryProducts($category->id, ['category', 'subCategory']);
         return view('admin.products.index')->with($data);
     }
 

@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory, Searchable;
 
-    protected $appends = ['formatted_date'];
+    protected $appends = ['formatted_date', 'sizes', 'colors'];
 
     public function category(){
 
@@ -32,6 +32,18 @@ class Product extends Model
     public function getFormattedDateAttribute(){
 
         return $this->created_at->diffForHumans();
+
+    }
+
+    public function getSizesAttribute(){
+
+        return explode(',', $this->available_sizes);
+
+    }
+
+    public function getColorsAttribute(){
+
+        return explode(',', $this->available_colors);
 
     }
 }

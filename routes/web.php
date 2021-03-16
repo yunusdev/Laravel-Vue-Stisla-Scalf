@@ -13,13 +13,39 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/',
+    [App\Http\Controllers\HomeController::class, 'index']
+)->name('home');
+
+Route::get('/shop',
+    [App\Http\Controllers\ShopController::class, 'index']
+)->name('shop');
+
+Route::get('/category/{slug}/products',
+    [App\Http\Controllers\CategoriesController::class, 'categoryProducts']
+)->name('category.products');
+
+Route::get('/sub-category/{slug}/products',
+    [App\Http\Controllers\CategoriesController::class, 'subCategoryProducts']
+)->name('sub-category.products');
+
+Route::get('/product/{slug}',
+    [App\Http\Controllers\ShopController::class, 'viewProduct']
+)->name('view.product');
+
+Route::group(['middleware'=>'auth'], function() {
+
+    Route::get(
+        '/logout',
+        [\App\Http\Controllers\Auth\LoginController::class, 'logout']
+    );
+
+});
+
+
+
 
 Route::group(['prefix'=>'admin'], function() {
 

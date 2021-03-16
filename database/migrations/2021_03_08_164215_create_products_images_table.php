@@ -16,10 +16,12 @@ class CreateProductsImagesTable extends Migration
         Schema::create('products_images', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('product_id');
+            $table->string('category_id');
             $table->string('name')->nullable();
             $table->string('path');
             $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

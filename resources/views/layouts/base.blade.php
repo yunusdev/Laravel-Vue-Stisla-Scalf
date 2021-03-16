@@ -19,11 +19,11 @@
     <link rel="apple-touch-icon" sizes="180x180" href="touch-icon-iphone-retina.png">
     <link rel="apple-touch-icon" sizes="167x167" href="touch-icon-ipad-retina.png">
     <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
-    <link rel="stylesheet" media="screen" href="css/vendor.min.css">
+    <link rel="stylesheet" media="screen" href="{{asset('css/vendor.min.css')}}">
     <!-- Main Template Styles-->
-    <link id="mainStyles" rel="stylesheet" media="screen" href="css/styles.min.css">
+    <link id="mainStyles" rel="stylesheet" media="screen" href="{{asset('css/styles.min.css')}}">
     <!-- Modernizr-->
-    <script src="js/modernizr.min.js"></script>
+    <script src="{{asset('js/modernizr.min.js')}}"></script>
 </head>
 <!-- Body-->
 <body>
@@ -31,7 +31,7 @@
     <div id="app">
 
         {{--@include('layouts.header')--}}
-        <nav-bar></nav-bar>
+        <nav-bar raw_user="{{auth()->user()}}"></nav-bar>
 
         <div class="offcanvas-wrapper">
             <!-- Page Content-->
@@ -45,8 +45,8 @@
 <!-- Backdrop-->
 <div class="site-backdrop"></div>
 <!-- JavaScript (jQuery) libraries, plugins and custom scripts-->
-<script src="js/vendor.min.js"></script>
-<script src="js/scripts.min.js"></script>
+<script src="{{asset('js/vendor.min.js')}}"></script>
+<script src="{{asset('js/scripts.min.js')}}"></script>
 <script src="{{asset('js/app.js')}}"></script>
 
 </body>

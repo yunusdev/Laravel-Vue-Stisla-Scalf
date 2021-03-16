@@ -257,7 +257,7 @@
             </div>
             <div class="topbar-column"><a class="hidden-md-down" href="#"><i class="icon-download"></i>&nbsp; Get mobile app</a>
                 <div class="lang-currency-switcher-wrap">
-                    <div class="lang-currency-switcher dropdown-toggle"><span class="language"><img alt="English" src="img/flags/GB.png"></span><span class="currency">$ USD</span></div>
+                    <div class="lang-currency-switcher dropdown-toggle"><span class="language"><img alt="English" src="/img/flags/GB.png"></span><span class="currency">$ USD</span></div>
                     <div class="dropdown-menu">
                         <div class="currency-select">
                             <select class="form-control form-control-rounded form-control-sm">
@@ -266,7 +266,7 @@
                                 <option value="usd">£ UKP</option>
                                 <option value="usd">¥ JPY</option>
                             </select>
-                        </div><a class="dropdown-item" href="#"><img src="img/flags/FR.png" alt="Français">Français</a><a class="dropdown-item" href="#"><img src="img/flags/DE.png" alt="Deutsch">Deutsch</a><a class="dropdown-item" href="#"><img src="img/flags/IT.png" alt="Italiano">Italiano</a>
+                        </div><a class="dropdown-item" href="#"><img src="/img/flags/FR.png" alt="Français">Français</a><a class="dropdown-item" href="#"><img src="img/flags/DE.png" alt="Deutsch">Deutsch</a><a class="dropdown-item" href="#"><img src="img/flags/IT.png" alt="Italiano">Italiano</a>
                     </div>
                 </div>
             </div>
@@ -279,18 +279,21 @@
             </form>
             <div class="site-branding">
                 <div class="inner">
-                    <!-- Off-Canvas Toggle (#shop-categories)--><a class="offcanvas-toggle cats-toggle" href="#shop-categories" data-toggle="offcanvas"></a>
-                    <!-- Off-Canvas Toggle (#mobile-menu)--><a class="offcanvas-toggle menu-toggle" href="#mobile-menu" data-toggle="offcanvas"></a>
-                    <!-- Site Logo--><a class="site-logo" href="index.html"><img src="img/logo/logo.png" alt="Unishop"></a>
+                    <a class="offcanvas-toggle cats-toggle" href="#shop-categories" data-toggle="offcanvas"></a>
+                    <a class="offcanvas-toggle menu-toggle" href="#mobile-menu" data-toggle="offcanvas"></a>
+                    <a class="site-logo" href="/">
+                        <h3>MY WEARS</h3>
+<!--                    <img src="img/logo/logo.png" alt="Unishop">-->
+                    </a>
                 </div>
             </div>
             <!-- Main Navigation-->
             <nav class="site-menu">
                 <ul>
                     <li class="has-megamenu active">
-                        <a href="index.html"><span>Home</span></a>
+                        <a href="/"><span>Home</span></a>
                     </li>
-                    <li><a href="shop-grid-ls.html"><span>Shop</span></a>
+                    <li><a href="/shop"><span>Shop</span></a>
                         <ul class="sub-menu">
                             <li><a href="shop-categories.html">Shop Categories</a></li>
                             <li class="has-children"><a href="shop-grid-ls.html"><span>Shop Grid</span></a>
@@ -330,18 +333,19 @@
                         <div class="search"><i class="icon-search"></i></div>
                         <div class="account"><a href="account-orders.html"></a><i class="icon-head"></i>
                             <ul class="toolbar-dropdown">
-                                <li class="sub-menu-user">
+                                <li v-if="user" class="sub-menu-user">
                                     <div class="user-ava"><img src="img/account/user-ava-sm.jpg" alt="Daniel Adams">
                                     </div>
                                     <div class="user-info">
-                                        <h6 class="user-name">Daniel Adams</h6><span class="text-xs text-muted">290 Reward points</span>
+                                        <h6 class="user-name">{{ user.name }}</h6><span class="text-xs text-muted">290 Reward points</span>
                                     </div>
                                 </li>
-                                <li><a href="account-profile.html">My Profile</a></li>
-                                <li><a href="account-orders.html">Orders List</a></li>
-                                <li><a href="account-wishlist.html">Wishlist</a></li>
-                                <li class="sub-menu-separator"></li>
-                                <li><a href="#"> <i class="icon-unlock"></i>Logout</a></li>
+
+                                <li v-if="!user"><a href="/login">Login</a></li>
+                                <li v-if="!user"><a href="/register">Register</a></li>
+                                <li v-if="user"><a href="account-wishlist.html">Wishlist</a></li>
+                                <li  v-if="user" class="sub-menu-separator"></li>
+                                <li v-if="user"><a href="/logout"> <i class="icon-unlock"></i>Logout</a></li>
                             </ul>
                         </div>
                         <div class="cart"><a href="cart.html"></a><i class="icon-bag"></i><span class="count">3</span><span class="subtotal">$289.68</span>
@@ -377,7 +381,21 @@
 
 <script>
 export default {
-name: "Navbar"
+    name: "Navbar",
+
+    props: ['raw_user'],
+
+    data(){
+
+        return {
+
+            user: this.raw_user ? JSON.parse(this.raw_user) : null
+
+        }
+
+    }
+
+
 }
 </script>
 

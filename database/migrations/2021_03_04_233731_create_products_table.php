@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('code');
             $table->string('name')->unique();
             $table->string('slug');
+            $table->bigInteger('views_count')->default(0)->nullable();
             $table->longText('description')->nullable();
             $table->enum('class', ['Male', 'Female', 'Unisex', 'Children', 'Not Applicable'])->default('Not Applicable');
             $table->double('weight')->nullable();

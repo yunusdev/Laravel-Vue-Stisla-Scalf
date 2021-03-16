@@ -8,6 +8,10 @@ interface CategoryContract
 
     public function getCategories();
 
+    public function getTopCategories(int $num = 3);
+
+    public function getCategoriesSubCategories();
+
     public function storeCategory(array $params);
 
     public function getCategoryBy(array $data);
