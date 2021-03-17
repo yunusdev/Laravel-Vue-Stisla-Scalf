@@ -282,7 +282,7 @@
                     <a class="offcanvas-toggle cats-toggle" href="#shop-categories" data-toggle="offcanvas"></a>
                     <a class="offcanvas-toggle menu-toggle" href="#mobile-menu" data-toggle="offcanvas"></a>
                     <a class="site-logo" href="/">
-                        <h3>MY WEARS</h3>
+<!--                        <h3>MY WEARS</h3>-->
 <!--                    <img src="img/logo/logo.png" alt="Unishop">-->
                     </a>
                 </div>

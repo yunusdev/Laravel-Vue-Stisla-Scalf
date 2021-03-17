@@ -1,5 +1,6 @@
 <template>
     <div class="container padding-bottom-3x mb-1">
+
         <div class="row">
             <!-- Poduct Gallery-->
             <div class="col-md-6">
@@ -32,12 +33,10 @@
                     </ul>
                 </div>
             </div>
+
             <!-- Product Info-->
             <div class="col-md-6">
                 <div class="padding-top-2x mt-2 hidden-md-up"></div>
-<!--                <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star"></i>-->
-<!--                </div>-->
-<!--                <span class="text-muted align-middle">&nbsp;&nbsp;4.2 | 3 customer reviews</span>-->
                 <h2 class="padding-top-1x text-normal">{{product.name}}</h2>
                 <span class="h2 d-block">
 <!--                    <del class="text-muted text-normal">$68.00</del>&nbsp; -->
@@ -85,7 +84,9 @@
                     </div>
                     <div class="sp-buttons mt-2 mb-2">
                         <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
-                        <button class="btn btn-primary" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="icon-bag"></i> Add to Cart</button>
+
+<!--                        <button class="btn btn-primary" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="icon-bag"></i> Add to Cart</button>-->
+                        <button class="btn btn-primary" @click="showAddToCart"><i class="icon-bag"></i> Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -225,17 +226,21 @@
             <product v-for="product, key in related_products" :key="product.name" :product="product"></product>
 
         </div>
+        <add-to-cart :sizes="product.sizes" :colors="product.colors"></add-to-cart>
+
     </div>
+
 
 </template>
 
 <script>
 import Product from "./Product";
+import AddToCart from "./AddToCart";
 
 export default {
     name: "ViewProduct",
 
-    components: {Product},
+    components: {AddToCart, Product},
 
     props: ['raw_product', 'raw_related_products'],
 
@@ -248,6 +253,15 @@ export default {
 
         }
 
+    },
+
+    methods: {
+
+        showAddToCart(){
+
+            this.$emit('show-add-cart')
+
+        }
     }
 }
 </script>
