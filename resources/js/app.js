@@ -54,7 +54,8 @@ Vue.component('store-coupon', require('./components/Admin/StoreCoupon.vue').defa
 Vue.component('nav-bar', require('./components/User/Layout/Navbar.vue').default);
 Vue.component('shop', require('./components/User/Shop/Index.vue').default);
 Vue.component('product-view', require('./components/User/Shop/ProductView.vue').default);
-Vue.component('trending-products', require('./components/User/TrendingProducts.vue').default);
+Vue.component('carousel-products', require('./components/User/CarouselProducts.vue').default);
+Vue.component('cart', require('./components/User/Shop/Cart.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -67,7 +68,7 @@ Vue.filter('formatDate', function(value, format = 'LLLL') {
     }
 })
 
-Vue.filter('formatMoney', function (amount, decimalCount = 2, decimal = ".", thousands = ",") {
+Vue.filter('formatMoney', function (amount, decimalCount = 0, decimal = ".", thousands = ",") {
 
     decimalCount = Math.abs(decimalCount);
     decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
@@ -87,10 +88,11 @@ Vue.filter('formatDate2', function(value, format = 'LL') {
     }
 })
 
-
+import store from './store/index'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const app = new Vue({
     el: '#app',
+    store,
 });

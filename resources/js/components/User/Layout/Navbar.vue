@@ -295,7 +295,6 @@
                     </li>
                     <li><a href="/shop"><span>Shop</span></a>
                         <ul class="sub-menu">
-                            <li><a href="shop-categories.html">Shop Categories</a></li>
                             <li class="has-children"><a href="shop-grid-ls.html"><span>Shop Grid</span></a>
                                 <ul class="sub-menu">
                                     <li><a href="shop-grid-ls.html">Grid Left Sidebar</a></li>
@@ -303,27 +302,11 @@
                                     <li><a href="shop-grid-ns.html">Grid No Sidebar</a></li>
                                 </ul>
                             </li>
-                            <li class="has-children"><a href="shop-list-ls.html"><span>Shop List</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="shop-list-ls.html">List Left Sidebar</a></li>
-                                    <li><a href="shop-list-rs.html">List Right Sidebar</a></li>
-                                    <li><a href="shop-list-ns.html">List No Sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="shop-single.html">Single Product</a></li>
-                            <li><a href="cart.html">Cart</a></li>
-                            <li class="has-children"><a href="checkout-address.html"><span>Checkout</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="checkout-address.html">Address</a></li>
-                                    <li><a href="checkout-shipping.html">Shipping</a></li>
-                                    <li><a href="checkout-payment.html">Payment</a></li>
-                                    <li><a href="checkout-review.html">Review</a></li>
-                                    <li><a href="checkout-complete.html">Complete</a></li>
-                                </ul>
-                            </li>
                         </ul>
                     </li>
-
+                    <li class="has-megamenu active">
+                        <a href="/cart"><span>Cart</span></a>
+                    </li>
                 </ul>
             </nav>
             <!-- Toolbar-->
@@ -331,7 +314,7 @@
                 <div class="inner">
                     <div class="tools">
                         <div class="search"><i class="icon-search"></i></div>
-                        <div class="account"><a href="account-orders.html"></a><i class="icon-head"></i>
+                        <div class="account"><a href="#"></a><i class="icon-head"></i>
                             <ul class="toolbar-dropdown">
                                 <li v-if="user" class="sub-menu-user">
                                     <div class="user-ava"><img src="img/account/user-ava-sm.jpg" alt="Daniel Adams">
@@ -348,24 +331,28 @@
                                 <li v-if="user"><a href="/logout"> <i class="icon-unlock"></i>Logout</a></li>
                             </ul>
                         </div>
-                        <div class="cart"><a href="cart.html"></a><i class="icon-bag"></i><span class="count">3</span><span class="subtotal">$289.68</span>
+                        <div class="cart"><a href="/cart"></a><i class="icon-bag"></i><span class="count">{{cartItems.length}}</span><span class="subtotal">N{{totalPrice | formatMoney}}</span>
                             <div class="toolbar-dropdown">
-                                <div class="dropdown-product-item"><span class="dropdown-product-remove"><i class="icon-cross"></i></span><a class="dropdown-product-thumb" href="shop-single.html"><img src="img/cart-dropdown/01.jpg" alt="Product"></a>
-                                    <div class="dropdown-product-info"><a class="dropdown-product-title" href="shop-single.html">Unionbay Park</a><span class="dropdown-product-details">1 x $43.90</span></div>
-                                </div>
-                                <div class="dropdown-product-item"><span class="dropdown-product-remove"><i class="icon-cross"></i></span><a class="dropdown-product-thumb" href="shop-single.html"><img src="img/cart-dropdown/02.jpg" alt="Product"></a>
-                                    <div class="dropdown-product-info"><a class="dropdown-product-title" href="shop-single.html">Daily Fabric Cap</a><span class="dropdown-product-details">2 x $24.89</span></div>
-                                </div>
-                                <div class="dropdown-product-item"><span class="dropdown-product-remove"><i class="icon-cross"></i></span><a class="dropdown-product-thumb" href="shop-single.html"><img src="img/cart-dropdown/03.jpg" alt="Product"></a>
-                                    <div class="dropdown-product-info"><a class="dropdown-product-title" href="shop-single.html">Haan Crossbody</a><span class="dropdown-product-details">1 x $200.00</span></div>
+                                <div v-for="item in cartItems" class="dropdown-product-item">
+                                    <span class="dropdown-product-remove">
+                                        <i class="icon-cross"></i>
+                                    </span>
+                                    <a class="dropdown-product-thumb" :href="'/product/' + item.product.slug">
+                                        <img class="cart_image" :src="item.product.front_image" alt="Product">
+                                    </a>
+                                    <div class="dropdown-product-info">
+                                        <a class="dropdown-product-title" :href="'/product/' + item.product.slug">{{item.product_name}} <span style="" class="text-muted dropdown-product-details">({{item.size}})</span></a>
+
+                                        <span class="dropdown-product-details">{{item.quantity}} x N{{item.product_price | formatMoney}}</span>
+                                    </div>
                                 </div>
                                 <div class="toolbar-dropdown-group">
                                     <div class="column"><span class="text-lg">Total:</span></div>
-                                    <div class="column text-right"><span class="text-lg text-medium">$289.68&nbsp;</span></div>
+                                    <div class="column text-right"><span class="text-lg text-medium">N{{totalPrice | formatMoney}}&nbsp;</span></div>
                                 </div>
                                 <div class="toolbar-dropdown-group">
-                                    <div class="column"><a class="btn btn-sm btn-block btn-secondary" href="cart.html">View Cart</a></div>
-                                    <div class="column"><a class="btn btn-sm btn-block btn-success" href="checkout-address.html">Checkout</a></div>
+                                    <div class="column"><a class="btn btn-sm btn-block btn-secondary" href="/cart">View Cart</a></div>
+                                    <div class="column"><a class="btn btn-sm btn-block btn-success" href="/checkout">Checkout</a></div>
                                 </div>
                             </div>
                         </div>
@@ -380,6 +367,9 @@
 </template>
 
 <script>
+import store from '../../../store/index'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
     name: "Navbar",
 
@@ -393,6 +383,13 @@ export default {
 
         }
 
+    },
+
+    computed: {
+        ...mapGetters({
+            cartItems: 'cart/items',
+            totalPrice: 'cart/totalPrice',
+        })
     }
 
 
@@ -400,5 +397,10 @@ export default {
 </script>
 
 <style scoped>
+
+.cart_image{
+    height: 50px;
+    width: 35px;
+}
 
 </style>

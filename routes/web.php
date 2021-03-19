@@ -35,6 +35,26 @@ Route::get('/product/{slug}',
     [App\Http\Controllers\ShopController::class, 'viewProduct']
 )->name('view.product');
 
+Route::get('cart',
+    [App\Http\Controllers\CartController::class, 'index']
+)->name('product.cart');
+
+Route::get('cart/user',
+    [App\Http\Controllers\CartController::class, 'getUserCartItems']
+);
+
+Route::post('cart/add/item',
+    [App\Http\Controllers\CartController::class, 'addItemsToCart']
+)->name('product.cart');
+
+Route::delete('/cart/clear',
+    [App\Http\Controllers\CartController::class, 'clearCart']
+);
+
+Route::delete('cart/remove/item/{item}',
+    [App\Http\Controllers\CartController::class, 'removeItem']
+);
+
 Route::group(['middleware'=>'auth'], function() {
 
     Route::get(
@@ -43,9 +63,6 @@ Route::group(['middleware'=>'auth'], function() {
     );
 
 });
-
-
-
 
 Route::group(['prefix'=>'admin'], function() {
 

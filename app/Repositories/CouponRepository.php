@@ -19,9 +19,14 @@ class CouponRepository extends BaseRepository implements CouponContract
         return $this->all();
     }
 
-    public function getCouponBy(array $data)
+    public function getCouponBy(array $data, array $relationship = [])
     {
-        return $this->findOneBy($data);
+        return $this->findOneBy($data, $relationship);
+    }
+
+    public function getCouponsBy(array $data, array $relationship = [])
+    {
+        return $this->findByWhere($data, $relationship);
     }
 
 

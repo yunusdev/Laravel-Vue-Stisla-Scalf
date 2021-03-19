@@ -4,11 +4,13 @@
 namespace App\Providers;
 
 
+use App\Contracts\CartContract;
 use App\Contracts\CategoryContract;
 use App\Contracts\CouponContract;
 use App\Contracts\ProductContract;
 use App\Contracts\ProductsImageContract;
 use App\Contracts\SubCategoryContract;
+use App\Repositories\CartRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CouponRepository;
 use App\Repositories\ProductRepository;
@@ -26,6 +28,7 @@ class RepositoryServiceProvider extends ServiceProvider
         ProductContract::class => ProductRepository::class,
         ProductsImageContract::class => ProductsImageRepository::class,
         CouponContract::class => CouponRepository::class,
+        CartContract::class => CartRepository::class,
 
     ];
 

@@ -30,7 +30,7 @@ class ShopController extends Controller
     public function viewProduct($slug){
 
         $data['product'] = $this->productRepository->getProductBy(['slug' => $slug], ['productImages']);
-        $this->productRepository->incrementProductViewCount($data['product']);
+//        $this->productRepository->incrementProductViewCount($data['product']);
         $data['related_products'] = $this->productRepository->getRelatedProducts($data['product']);
         return view('shop.product-view')->with($data);
 

@@ -226,7 +226,7 @@
             <product v-for="product, key in related_products" :key="product.name" :product="product"></product>
 
         </div>
-        <add-to-cart :sizes="product.sizes" :colors="product.colors"></add-to-cart>
+        <add-to-cart :sizes="product.sizes" :product="product" :colors="product.colors"></add-to-cart>
 
     </div>
 

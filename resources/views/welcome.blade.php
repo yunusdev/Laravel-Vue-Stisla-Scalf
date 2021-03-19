@@ -118,7 +118,10 @@
         </div>
     </section>
     <!-- Featured Products Carousel-->
-    <trending-products raw_products="{{$trending_products}}"></trending-products>
+    <section class="container padding-top-3x padding-bottom-3x">
+        <h3 class="text-center mb-30">Trending Products</h3>
+        <carousel-products raw_products="{{$trending_products}}"></carousel-products>
+    </section>
     <!-- Product Widgets-->
     <section class="container padding-bottom-2x">
         <div class="row">

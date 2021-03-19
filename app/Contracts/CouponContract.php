@@ -10,7 +10,9 @@ interface CouponContract
 
     public function storeCoupon(array $params);
 
-    public function getCouponBy(array $data);
+    public function getCouponBy(array $data, array $relationship = []);
+
+    public function getCouponsBy(array $data, array $relationship = []);
 
     public function updateCoupon(array $params, string $id);
 //

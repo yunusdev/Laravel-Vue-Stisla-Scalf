@@ -20,6 +20,9 @@
     <link rel="apple-touch-icon" sizes="167x167" href="touch-icon-ipad-retina.png">
     <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
     <link rel="stylesheet" media="screen" href="{{asset('css/vendor.min.css')}}">
+    <link rel="stylesheet" media="screen" href="{{asset('css/base.css')}}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
     <!-- Main Template Styles-->
     <link id="mainStyles" rel="stylesheet" media="screen" href="{{asset('css/styles.min.css')}}">
     <!-- Modernizr-->
