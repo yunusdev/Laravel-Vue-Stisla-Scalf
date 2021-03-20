@@ -35,31 +35,44 @@ Route::get('/product/{slug}',
     [App\Http\Controllers\ShopController::class, 'viewProduct']
 )->name('view.product');
 
-Route::get('cart',
-    [App\Http\Controllers\CartController::class, 'index']
-)->name('product.cart');
+Route::group(['prefix' => 'cart'], function (){
 
-Route::get('cart/user',
-    [App\Http\Controllers\CartController::class, 'getUserCartItems']
+    Route::get('/',
+        [App\Http\Controllers\CartController::class, 'index']
+    )->name('product.cart');
+
+    Route::get('/items',
+        [App\Http\Controllers\CartController::class, 'getUserCartItems']
+    );
+
+    Route::post('/add/item',
+        [App\Http\Controllers\CartController::class, 'addItemsToCart']
+    );
+
+    Route::delete('/remove/item/{item}',
+        [App\Http\Controllers\CartController::class, 'removeItem']
+    );
+
+    Route::delete('/clear',
+        [App\Http\Controllers\CartController::class, 'clearCart']
+    );
+
+});
+
+Route::get('/checkout',
+    [App\Http\Controllers\CheckoutController::class, 'index']
 );
 
-Route::post('cart/add/item',
-    [App\Http\Controllers\CartController::class, 'addItemsToCart']
-)->name('product.cart');
-
-Route::delete('/cart/clear',
-    [App\Http\Controllers\CartController::class, 'clearCart']
-);
-
-Route::delete('cart/remove/item/{item}',
-    [App\Http\Controllers\CartController::class, 'removeItem']
-);
 
 Route::group(['middleware'=>'auth'], function() {
 
     Route::get(
         '/logout',
         [\App\Http\Controllers\Auth\LoginController::class, 'logout']
+    );
+
+    Route::post('/coupon/validate',
+        [App\Http\Controllers\CouponController::class, 'validateCoupon']
     );
 
 });

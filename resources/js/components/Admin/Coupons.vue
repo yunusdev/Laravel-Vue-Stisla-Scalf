@@ -17,6 +17,8 @@
                     <th>Status</th>
                     <th>Type</th>
                     <th>Discount</th>
+                    <th>Min Amount</th>
+                    <th>Will Max Out</th>
                     <th>Max Usage</th>
                     <th>Will Expire</th>
                     <th>Expires In</th>
@@ -32,8 +34,10 @@
                     </td>
                     <td>{{coupon.status == 1 ? 'Usable' : 'Not Usable'}}</td>
                     <td>{{coupon.type}}</td>
-                    <td>{{coupon.discount}}</td>
-                    <td>{{coupon.max_usage}}</td>
+                    <td>N{{coupon.discount}}</td>
+                    <td>N{{coupon.lowest_amount || '--'}}</td>
+                    <td>{{coupon.will_max_out == 1 ? 'Yes' : 'No'}}</td>
+                    <td>{{coupon.max_usage || '--'}}</td>
                     <td>{{coupon.will_expire == 1 ? 'Yes' : 'No'}}</td>
                     <td>{{coupon.expires_format || '--'}}</td>
                     <td><a @click="editCoupon(coupon)"><i class="text-center fas fa-edit"></i></a></td>
@@ -47,6 +51,8 @@
                     <th>Status</th>
                     <th>Type</th>
                     <th>Discount</th>
+                    <th>Min Amount</th>
+                    <th>Will Max Out</th>
                     <th>Max Usage</th>
                     <th>Will Expire</th>
                     <th>Expires In</th>

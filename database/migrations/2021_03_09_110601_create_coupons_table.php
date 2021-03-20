@@ -23,9 +23,10 @@ class CreateCouponsTable extends Migration
             $table->string('product_id')->nullable();
             $table->enum('type', ['Percentage', 'Price'])->default('Percentage');
             $table->bigInteger('discount')->default(20); // by percentage or price
-            $table->bigInteger('max_usage')->default(10);
+            $table->bigInteger('max_usage')->default(10)->nullable();
             $table->bigInteger('remaining')->nullable();
             $table->boolean('will_expire')->default(1);
+            $table->boolean('will_max_out')->default(1);
             $table->boolean('status')->default(1);
             $table->timestamp('expires_in')->nullable();
             $table->timestamps();

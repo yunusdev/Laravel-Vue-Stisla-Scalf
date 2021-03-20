@@ -5,7 +5,10 @@ export default {
     namespaced: true,
     state: {
         items: [],
-        total_price: [],
+        coupon: null,
+        coupon_data: null,
+        total_price: 0,
+        total_fee: null,
     },
 
     getters: {
@@ -15,15 +18,15 @@ export default {
         },
         totalPrice(state){
             return state.total_price;
-        }
+        },
     },
 
     actions: {
         getUserCartItems({ state, commit }){
 
-            return Axios.get(`/${baseUrl}/user`).then(res => {
+            return Axios.get(`/${baseUrl}/items`).then(res => {
                 console.log(res.data)
-                commit('setTotalPrice', res.data.total_price)
+                commit('setTotalPrice', parseInt(res.data.total_price))
                 commit('setCartItems', res.data.items)
                 return res.data
             }).catch(err => {
@@ -78,20 +81,37 @@ export default {
             }).catch(err => {
                 return Promise.reject(err)
             })
+        },
+        couponValidate({ state, commit }, data){
+            return Axios.post(`/coupon/validate`, data).then(res => {
+                const data = res.data
+
+                commit('setCouponData', data.coupon_data)
+
+                return res.data
+            }).catch(err => {
+                return Promise.reject(err)
+            })
         }
 
     },
     mutations: {
 
         setCartItems(state, items){
-
             return state['items'] = items;
         },
-
         setTotalPrice(state, price){
-
             return state['total_price'] = price;
-        }
+        },
+        setTotalFee(state, price){
+            return state['total_fee'] = price;
+        },
+        setCoupon(state, coupon){
+            return state['coupon'] = coupon;
+        },
+        setCouponData(state, coupon_data){
+            return state['coupon_data'] = coupon_data;
+        },
 
 
     }

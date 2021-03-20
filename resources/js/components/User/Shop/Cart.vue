@@ -42,16 +42,38 @@
         </div>
         <div class="shopping-cart-footer">
             <div class="column">
-                <form class="coupon-form" method="post">
-                    <input class="form-control form-control-sm" type="text" placeholder="Coupon code" required>
-                    <button class="btn btn-outline-primary btn-sm" type="submit">Apply Coupon</button>
+                <form @submit.prevent="validateCoupon()" class="coupon-form">
+                    <input v-model="coupon_code" class="form-control text-uppercase" type="text" placeholder="Coupon code" required>
+                    <button class="btn btn-outline-primary" type="submit">Apply Coupon</button>
+                    <div class="coupon" :class="!coupon_data.valid ? 'text-danger' : 'text-success'" v-if="coupon_data" >
+                        {{isValidCoupon ? 'Coupon Applied successfully!' : coupon_data.message}}
+                    </div>
                 </form>
             </div>
-            <div class="column text-lg">Subtotal: <span class="text-medium">N{{totalPrice | formatMoney}}</span></div>
+            <div class="column text-lg">
+                Subtotal: <span class="text-medium">N{{totalPrice | formatMoney}}</span>
+                <div class="mt-2 mb-2" v-if="isValidCoupon">
+                    <span class="">Discount:
+                        <span v-if="coupon_data.coupon.type === 'Price'" class="text-small text-danger">
+                            N{{coupon_data.coupon.discount | formatMoney}} off
+                        </span>
+                        <span v-else class="text-small text-danger">
+                            {{coupon_data.coupon.discount}}% off
+                        </span>
+                    </span>
+                </div>
+                <span class="" v-if="isValidCoupon">
+                    Total Price: <span class="text-medium">N{{totalFee | formatMoney}}</span>
+                </span>
+
+            </div>
+
         </div>
         <div class="shopping-cart-footer">
-            <div class="column"><a class="btn btn-outline-secondary" href="shop-grid-ls.html"><i class="icon-arrow-left"></i>&nbsp;Back to Shopping</a></div>
-            <div class="column"><a class="btn btn-primary" href="#" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Your cart" data-toast-message="is updated successfully!">Update Cart</a><a class="btn btn-success" href="checkout-address.html">Checkout</a></div>
+            <div class="column"><a class="btn btn-outline-secondary" href="/shop"><i class="icon-arrow-left"></i>&nbsp;Back to Shopping</a></div>
+            <div class="column">
+                <a class="btn btn-primary" href="#">Update Cart</a>
+                <a class="btn btn-success" href="/checkout">Checkout</a></div>
         </div>
         <!-- Related Products Carousel-->
         <h3 class="text-center padding-top-2x mt-2 padding-bottom-1x">You May Also Like</h3>
@@ -63,6 +85,7 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import store from '../../../store/index'
 
 
 export default {
@@ -74,13 +97,18 @@ export default {
 
         return {
 
-            cart_items:[]
+            cart_items:[],
+            coupon_code: null,
+            coupon_data: null
 
         }
 
     },
 
     async mounted() {
+
+        store.commit('cart/setCouponData', null)
+        store.commit('cart/setTotalFee', null)
 
         await this.getUserCartItems()
 
@@ -90,7 +118,37 @@ export default {
         ...mapGetters({
             cartItems: 'cart/items',
             totalPrice: 'cart/totalPrice',
-        })
+            // isValidCoupon: 'cart/isValidCoupon',
+            // coupon: 'cart/coupon',
+            // getCouponDiscount: 'cart/getCouponDiscount',
+            // totalFee: 'cart/totalFee',
+        }),
+
+        totalFee(){
+            if (this.coupon_data && this.coupon_data.valid){
+                return Math.ceil(this.totalPrice - this.getCouponDiscount );
+            }
+            return this.totalPrice
+        },
+
+        getCouponDiscount(){
+            if (this.isValidCoupon){
+                if (this.coupon.type === 'Price'){
+                    return this.coupon.discount;
+                }else if (this.coupon.type === 'Percentage'){
+                    return (this.coupon.discount / 100) * this.totalPrice;
+                }else{
+                    return 0;
+                }
+            }
+        },
+        isValidCoupon(){
+            return this.coupon_data && this.coupon_data.valid && this.coupon_data.coupon
+        },
+        coupon(){
+            return this.coupon_data.coupon
+        }
+
     },
 
     methods: {
@@ -99,7 +157,8 @@ export default {
             getUserCartItems: 'cart/getUserCartItems',
             addItemsToCart: 'cart/addItemsToCart',
             removeItemFromCart: 'cart/removeItemFromCart',
-            clearCart: 'cart/clearCart'
+            clearCart: 'cart/clearCart',
+            couponValidate: 'cart/couponValidate',
         }),
 
         updateCartItemQty(item){
@@ -120,6 +179,18 @@ export default {
             })
         },
 
+        validateCoupon(){
+            this.couponValidate({code: this.coupon_code, total_amount: this.totalPrice}).then((data) => {
+                console.log(data)
+                this.coupon_data = data.coupon_data
+                store.commit('cart/setTotalFee', this.totalFee)
+                this.notifSuceess(this.coupon_data.message);
+            }).catch((err) => {
+                this.notifError( err.message || 'An error occurred')
+            })
+
+        },
+
         emptyCart(item){
             this.clearCart().then((data) => {
                 this.notifSuceess('Cart cleared successfully');
@@ -137,6 +208,13 @@ export default {
 .cart-item-image{
     width: 90px;
     height: 70px;
+}
+
+.coupon{
+
+    margin-top: -5px;
+    font-weight: bold;
+    /*font-size: 15px;*/
 }
 
 

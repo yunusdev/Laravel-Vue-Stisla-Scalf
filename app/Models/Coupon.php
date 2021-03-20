@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Coupon extends Model
@@ -26,4 +27,15 @@ class Coupon extends Model
 
     }
 
+    public static function timestamp($timestamp)
+    {
+        return Carbon::createFromTimestampUTC($timestamp)->timezone('UTC');
+    }
+
+    public static function isPast($timestamp)
+    {
+        $timestamp = static::timestamp($timestamp);
+
+        return $timestamp->isPast();
+    }
 }

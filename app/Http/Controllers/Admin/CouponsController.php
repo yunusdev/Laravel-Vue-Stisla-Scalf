@@ -39,8 +39,8 @@ class CouponsController extends Controller
 
             ]);
 
-            $params = $request->only('name', 'code', 'product_id', 'type', 'discount', 'max_usage',
-                'remaining', 'expires_in', 'lowest_amount', 'will_expire', 'status', 'description');
+            $params = $request->only('name', 'code', 'product_id', 'type', 'discount', 'will_max_out',
+                'max_usage', 'expires_in', 'lowest_amount', 'will_expire', 'status', 'description');
             return $this->couponRepository->storeCoupon($params);
 
         }catch (\Throwable $exception){
@@ -63,7 +63,7 @@ class CouponsController extends Controller
             ]);
 
             $params = $request->only('name', 'code', 'product_id', 'type', 'discount', 'max_usage',
-                'remaining', 'expires_in', 'lowest_amount', 'will_expire', 'status', 'description');
+                'remaining', 'expires_in', 'lowest_amount', 'will_expire', 'will_max_out', 'status', 'description');
             $this->couponRepository->updateCoupon($params, $coupon->id);
             return $coupon->fresh();
 

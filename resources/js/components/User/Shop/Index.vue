@@ -159,12 +159,10 @@ export default {
     data(){
 
         return {
-
             products: JSON.parse(this.raw_products),
             categories: JSON.parse(this.raw_categories),
             category: this.raw_category ? JSON.parse(this.raw_category): null,
             sub_category: this.raw_sub_category ? JSON.parse(this.raw_sub_category) : null
-
         }
 
     }

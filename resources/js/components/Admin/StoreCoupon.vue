@@ -24,7 +24,7 @@
                         <select required v-model="coupon.type" class="form-control">
                             <option  value="">--Select Type--</option>
                             <option  :value="'Percentage'">Percentage</option>
-                            <option  :value="'Price'">Amount</option>
+                            <option  :value="'Price'">Price</option>
                         </select>
                         <div class="invalid-feedback" v-if="errors.hasError('type')">{{ errors.first('type') }}</div>
                     </div>
@@ -33,7 +33,28 @@
                         <input min="1" type="number" :class="{'form-control': true, 'is-invalid': errors.hasError('discount')}" placeholder="Discount" v-model="coupon.discount">
                         <div class="invalid-feedback" v-if="errors.hasError('discount')">{{ errors.first('discount') }}</div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="col-md-4">
+                        <label class="custom-switch mt-2">
+                            <input v-model="coupon.status" type="checkbox" name="status" class="custom-switch-input">
+                            <span class="custom-switch-indicator"></span>
+                            <span class="custom-switch-description">Status</span>
+                        </label>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="custom-switch mt-2">
+                            <input v-model="coupon.will_max_out" type="checkbox" name="will_expire" class="custom-switch-input">
+                            <span class="custom-switch-indicator"></span>
+                            <span class="custom-switch-description">Will Max Out</span>
+                        </label>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="custom-switch mt-2">
+                            <input v-model="coupon.will_expire" type="checkbox" name="will_expire" class="custom-switch-input">
+                            <span class="custom-switch-indicator"></span>
+                            <span class="custom-switch-description">Will Expire</span>
+                        </label>
+                    </div>
+                    <div v-show="coupon.will_max_out" class="form-group col-md-6">
                         <label>Max Usage:</label>
                         <input min="1" type="number" :class="{'form-control': true, 'is-invalid': errors.hasError('max_usage')}" placeholder="Max Usage" v-model="coupon.max_usage">
                         <div class="invalid-feedback" v-if="errors.hasError('max_usage')">{{ errors.first('max_usage') }}</div>
@@ -42,20 +63,6 @@
                         <label>Lowest Amount:</label>
                         <input min="1" type="number" :class="{'form-control': true, 'is-invalid': errors.hasError('lowest_amount')}" placeholder="Lowest Amount" v-model="coupon.lowest_amount">
                         <div class="invalid-feedback" v-if="errors.hasError('lowest_amount')">{{ errors.first('lowest_amount') }}</div>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="custom-switch mt-2">
-                            <input v-model="coupon.status" type="checkbox" name="status" class="custom-switch-input">
-                            <span class="custom-switch-indicator"></span>
-                            <span class="custom-switch-description">Status</span>
-                        </label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="custom-switch mt-2">
-                            <input v-model="coupon.will_expire" type="checkbox" name="will_expire" class="custom-switch-input">
-                            <span class="custom-switch-indicator"></span>
-                            <span class="custom-switch-description">Will Expire</span>
-                        </label>
                     </div>
 
                     <div v-show="coupon.will_expire" class="form-group  col-md-12">
@@ -99,8 +106,9 @@ class Coupon{
         this.description = coupon.description || '';
         this.type = coupon.type || 'Percentage';
         this.discount = coupon.discount || '';
-        this.lowest_amount = coupon.lowest_amount || '';
+        this.lowest_amount = coupon.lowest_amount || 3000;
         this.max_usage = coupon.max_usage || '';
+        this.will_max_out = coupon.will_max_out || true;
         this.status = coupon.status || true;
         this.will_expire = coupon.will_expire || true;
         this.expires_in = coupon.expires_in || '';
@@ -190,14 +198,26 @@ export default {
         customFormatter(date) {
             return moment(date).format('MMMM Do YYYY, h:mm:ss a');
         },
-
         storeCoupon(){
 
             if (this.coupon.type === 'Percentage' && this.coupon.discount > 80){
                 this.notifError( 'Percentage discount cant be greater than 80')
                 return;
             }
-
+            if (this.coupon.type === 'Price'){
+                if (this.coupon.discount > (this.coupon.lowest_amount / 2)){
+                    this.notifError( 'Pls provide a lesser discount or increase the lowest amount')
+                    return;
+                }
+            }
+            if (this.coupon.will_expire && !this.coupon.expires_in){
+                this.notifError( 'Pls select an expire date')
+                return;
+            }
+            if (this.coupon.will_max_out && !this.coupon.max_usage){
+                this.notifError( 'Pls provide the maximum usage')
+                return;
+            }
             if (!this.editing){
 
                 this.createCoupon()
