@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class TodoController extends Controller
+{
+
+    #TODO CARTING AND CHECKOUT FOR NOT AUTHENTICATED USERS
+
+    #TODO SET MIN AMOUNT TO PAY AND DELIVERY PRICES FOR LAGOS AND OUTSIDE LAGOS IN A CONFIG MODEL
+
+    #TODO A SELECT FOR SELECTING LGA AND THEIR PRICE
+}

@@ -1,5 +1,9 @@
 @extends('layouts.base')
 
+@section('styles')
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+@endsection
+
 @section('content')
 
     <!-- Page Title-->
@@ -19,5 +23,7 @@
         </div>
     </div>
     <!-- Page Content-->
+
+    <checkout paystack_pk="{{$paystack_pk}}" raw_user="{{auth()->user()}}"></checkout>
 
 @endsection

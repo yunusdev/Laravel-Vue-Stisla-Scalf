@@ -10,7 +10,8 @@ class CheckoutController extends Controller
 
     public function index(){
 
-        return view('shop.checkout');
+        $data['paystack_pk'] = env('PAYSTACK_PUBLIC_KEY');
+        return view('shop.checkout')->with($data);
 
     }
 }

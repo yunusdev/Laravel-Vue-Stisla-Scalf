@@ -56,6 +56,7 @@ Vue.component('shop', require('./components/User/Shop/Index.vue').default);
 Vue.component('product-view', require('./components/User/Shop/ProductView.vue').default);
 Vue.component('carousel-products', require('./components/User/CarouselProducts.vue').default);
 Vue.component('cart', require('./components/User/Shop/Cart.vue').default);
+Vue.component('checkout', require('./components/User/Shop/Checkout.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -63,6 +63,22 @@ Route::get('/checkout',
     [App\Http\Controllers\CheckoutController::class, 'index']
 );
 
+Route::group(['prefix' => 'locality'], function (){
+
+    Route::get('/countries',
+        [App\Http\Controllers\LocalityController::class, 'getCountries']
+    );
+
+    Route::get('/nigerian/states',
+        [App\Http\Controllers\LocalityController::class, 'getNigeriaStates']
+    );
+
+    Route::get('/nigerian/states/{stateId}/lga',
+        [App\Http\Controllers\LocalityController::class, 'getNigeriaStatesLGA']
+    );
+
+});
+
 
 Route::group(['middleware'=>'auth'], function() {
 

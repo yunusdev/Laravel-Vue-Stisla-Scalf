@@ -136,11 +136,12 @@ export default {
                 if (this.coupon.type === 'Price'){
                     return this.coupon.discount;
                 }else if (this.coupon.type === 'Percentage'){
-                    return (this.coupon.discount / 100) * this.totalPrice;
+                    return Math.round((this.coupon.discount / 100) * this.totalPrice);
                 }else{
                     return 0;
                 }
             }
+            return 0;
         },
         isValidCoupon(){
             return this.coupon_data && this.coupon_data.valid && this.coupon_data.coupon
@@ -183,8 +184,12 @@ export default {
             this.couponValidate({code: this.coupon_code, total_amount: this.totalPrice}).then((data) => {
                 console.log(data)
                 this.coupon_data = data.coupon_data
-                store.commit('cart/setTotalFee', this.totalFee)
-                this.notifSuceess(this.coupon_data.message);
+                if(data.coupon_data.valid) {
+                    store.commit('cart/setTotalFee', this.totalFee)
+                    store.commit('cart/setValidCoupon', this.isValidCoupon)
+                    store.commit('cart/setCouponDiscount', this.getCouponDiscount)
+                }
+                this.notifSuceess(data.coupon_data.message);
             }).catch((err) => {
                 this.notifError( err.message || 'An error occurred')
             })

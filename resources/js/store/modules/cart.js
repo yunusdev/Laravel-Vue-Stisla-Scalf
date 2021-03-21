@@ -5,9 +5,12 @@ export default {
     namespaced: true,
     state: {
         items: [],
-        coupon: null,
+        valid_coupon: null,
         coupon_data: null,
         total_price: 0,
+        delivery_fee: 0,
+        pay_before_percentage: 60,
+        coupon_discount: 0,
         total_fee: null,
     },
 
@@ -19,6 +22,21 @@ export default {
         totalPrice(state){
             return state.total_price;
         },
+        totalFee(state){
+            return state.total_fee;
+        },
+        validCoupon(state){
+            return state.valid_coupon;
+        },
+        couponDiscount(state){
+            return state.coupon_discount;
+        },
+        deliveryFee(state){
+            return state.delivery_fee
+        },
+        payBeforePercentage(state){
+            return state.pay_before_percentage
+        }
     },
 
     actions: {
@@ -86,7 +104,7 @@ export default {
             return Axios.post(`/coupon/validate`, data).then(res => {
                 const data = res.data
 
-                commit('setCouponData', data.coupon_data)
+                if(data.coupon_data.valid) commit('setCouponData', data.coupon_data)
 
                 return res.data
             }).catch(err => {
@@ -112,7 +130,18 @@ export default {
         setCouponData(state, coupon_data){
             return state['coupon_data'] = coupon_data;
         },
-
+        setValidCoupon(state, validCoupon){
+            return state['valid_coupon'] = validCoupon;
+        },
+        setCouponDiscount(state, coupon_discount){
+            return state['coupon_discount'] = coupon_discount;
+        },
+        setDeliveryFee(state, delivery_fee){
+            return state['delivery_fee'] = delivery_fee;
+        },
+        setPayBeforePercentage(state, pay_before_percentage){
+            return state['pay_before_percentage'] = pay_before_percentage;
+        },
 
     }
 }

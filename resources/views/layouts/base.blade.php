@@ -27,6 +27,7 @@
     <link id="mainStyles" rel="stylesheet" media="screen" href="{{asset('css/styles.min.css')}}">
     <!-- Modernizr-->
     <script src="{{asset('js/modernizr.min.js')}}"></script>
+    @yield('styles')
 </head>
 <!-- Body-->
 <body>
