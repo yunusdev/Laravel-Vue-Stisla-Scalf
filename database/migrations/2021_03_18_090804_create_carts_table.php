@@ -18,7 +18,7 @@ class CreateCartsTable extends Migration
             $table->string('user_id');
             $table->string('product_id');
             $table->string('product_name');
-            $table->decimal('product_amount', 13, 2);
+            $table->decimal('product_price', 13, 2);
             $table->integer('quantity')->default(1);
             $table->string('size');
             $table->string('color');

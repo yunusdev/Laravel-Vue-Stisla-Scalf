@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Contracts\CategoryContract;
 use App\Contracts\ProductContract;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {

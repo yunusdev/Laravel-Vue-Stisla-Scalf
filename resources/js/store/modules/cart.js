@@ -7,7 +7,7 @@ export default {
         items: [],
         valid_coupon: null,
         coupon_data: null,
-        total_price: 0,
+        sub_total_amount: 0,
         delivery_fee: 0,
         pay_before_percentage: 60,
         coupon_discount: 0,
@@ -19,8 +19,8 @@ export default {
         items(state){
             return state.items;
         },
-        totalPrice(state){
-            return state.total_price;
+        subTotalAmount(state){
+            return state.sub_total_amount;
         },
         totalFee(state){
             return state.total_fee;
@@ -41,10 +41,9 @@ export default {
 
     actions: {
         getUserCartItems({ state, commit }){
-
             return Axios.get(`/${baseUrl}/items`).then(res => {
                 console.log(res.data)
-                commit('setTotalPrice', parseInt(res.data.total_price))
+                commit('setSubTotalAmount', parseInt(res.data.total_price))
                 commit('setCartItems', res.data.items)
                 return res.data
             }).catch(err => {
@@ -57,7 +56,7 @@ export default {
                 items
             }).then(res => {
 
-                commit('setTotalPrice', res.data.total_price)
+                commit('setSubTotalAmount', res.data.total_price)
                 const data = res.data.items;
                 data.forEach((newItem) => {
                     const itemIndex = state.items.findIndex((item, index) => item.id === newItem.id)
@@ -80,7 +79,7 @@ export default {
 
         removeItemFromCart({ state, commit }, itemId){
             return Axios.delete(`/${baseUrl}/remove/item/${itemId}`).then(res => {
-                commit('setTotalPrice', res.data.total_price)
+                commit('setSubTotalAmount', res.data.total_price)
                 const items = state.items.filter((item) => item.id !== itemId);
                 commit('setCartItems', items)
                 return res.data
@@ -93,8 +92,6 @@ export default {
         },
         clearCart({ state, commit }){
             return Axios.delete(`/${baseUrl}/clear`).then(res => {
-                commit('setTotalPrice', 0)
-                commit('setCartItems', [])
                 return res.data
             }).catch(err => {
                 return Promise.reject(err)
@@ -110,22 +107,28 @@ export default {
             }).catch(err => {
                 return Promise.reject(err)
             })
-        }
+        },
 
+        resetAllShoppingMutations({ state, commit }){
+            commit('setCouponData', [])
+            commit('setCartItems', [])
+            commit('setSubTotalAmount', 0)
+            commit('setTotalFee', 0)
+            commit('setValidCoupon', null)
+            commit('setCouponDiscount', 0)
+            commit('setDeliveryFee', 0)
+        }
     },
     mutations: {
 
         setCartItems(state, items){
             return state['items'] = items;
         },
-        setTotalPrice(state, price){
-            return state['total_price'] = price;
+        setSubTotalAmount(state, sub_total_amount){
+            return state['sub_total_amount'] = sub_total_amount;
         },
         setTotalFee(state, price){
             return state['total_fee'] = price;
-        },
-        setCoupon(state, coupon){
-            return state['coupon'] = coupon;
         },
         setCouponData(state, coupon_data){
             return state['coupon_data'] = coupon_data;

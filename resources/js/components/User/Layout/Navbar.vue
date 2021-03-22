@@ -307,6 +307,9 @@
                     <li class="has-megamenu active">
                         <a href="/cart"><span>Cart</span></a>
                     </li>
+                    <li v-if="user" class="has-megamenu active">
+                        <a href="/account/orders"><span>Orders</span></a>
+                    </li>
                 </ul>
             </nav>
             <!-- Toolbar-->
@@ -331,7 +334,7 @@
                                 <li v-if="user"><a href="/logout"> <i class="icon-unlock"></i>Logout</a></li>
                             </ul>
                         </div>
-                        <div class="cart"><a href="/cart"></a><i class="icon-bag"></i><span class="count">{{cartItems.length}}</span><span class="subtotal">N{{totalPrice | formatMoney}}</span>
+                        <div class="cart"><a href="/cart"></a><i class="icon-bag"></i><span class="count">{{cartItems.length}}</span><span class="subtotal">N{{subTotalAmount | formatMoney}}</span>
                             <div class="toolbar-dropdown">
                                 <div v-for="item in cartItems" class="dropdown-product-item">
                                     <span class="dropdown-product-remove">
@@ -348,7 +351,7 @@
                                 </div>
                                 <div class="toolbar-dropdown-group">
                                     <div class="column"><span class="text-lg">Total:</span></div>
-                                    <div class="column text-right"><span class="text-lg text-medium">N{{totalPrice | formatMoney}}&nbsp;</span></div>
+                                    <div class="column text-right"><span class="text-lg text-medium">N{{subTotalAmount | formatMoney}}&nbsp;</span></div>
                                 </div>
                                 <div class="toolbar-dropdown-group">
                                     <div class="column"><a class="btn btn-sm btn-block btn-secondary" href="/cart">View Cart</a></div>
@@ -388,7 +391,7 @@ export default {
     computed: {
         ...mapGetters({
             cartItems: 'cart/items',
-            totalPrice: 'cart/totalPrice',
+            subTotalAmount: 'cart/subTotalAmount',
         })
     }
 

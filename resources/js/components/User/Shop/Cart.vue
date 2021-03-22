@@ -51,21 +51,20 @@
                 </form>
             </div>
             <div class="column text-lg">
-                Subtotal: <span class="text-medium">N{{totalPrice | formatMoney}}</span>
-                <div class="mt-2 mb-2" v-if="isValidCoupon">
+                Subtotal: <span class="text-medium">N{{subTotalAmount | formatMoney}}</span>
+                <div class="mt-2 mb-2" v-if="validCoupon">
                     <span class="">Discount:
-                        <span v-if="coupon_data.coupon.type === 'Price'" class="text-small text-danger">
-                            N{{coupon_data.coupon.discount | formatMoney}} off
+                        <span v-if="validCoupon.type === 'Price'" class="text-small text-danger">
+                            N{{validCoupon.discount | formatMoney}} off
                         </span>
                         <span v-else class="text-small text-danger">
-                            {{coupon_data.coupon.discount}}% off
+                            {{validCoupon.discount}}% off
                         </span>
                     </span>
                 </div>
-                <span class="" v-if="isValidCoupon">
+                <span class="" v-if="validCoupon">
                     Total Price: <span class="text-medium">N{{totalFee | formatMoney}}</span>
                 </span>
-
             </div>
 
         </div>
@@ -84,7 +83,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 import store from '../../../store/index'
 
 
@@ -117,18 +116,17 @@ export default {
     computed: {
         ...mapGetters({
             cartItems: 'cart/items',
-            totalPrice: 'cart/totalPrice',
-            // isValidCoupon: 'cart/isValidCoupon',
-            // coupon: 'cart/coupon',
-            // getCouponDiscount: 'cart/getCouponDiscount',
+            subTotalAmount: 'cart/subTotalAmount',
+            validCoupon: 'cart/validCoupon',
+            couponDiscount: 'cart/couponDiscount',
             // totalFee: 'cart/totalFee',
         }),
 
         totalFee(){
-            if (this.coupon_data && this.coupon_data.valid){
-                return Math.ceil(this.totalPrice - this.getCouponDiscount );
+            if (this.validCoupon){
+                return Math.ceil(this.subTotalAmount - this.couponDiscount );
             }
-            return this.totalPrice
+            return this.subTotalAmount
         },
 
         getCouponDiscount(){
@@ -136,7 +134,7 @@ export default {
                 if (this.coupon.type === 'Price'){
                     return this.coupon.discount;
                 }else if (this.coupon.type === 'Percentage'){
-                    return Math.round((this.coupon.discount / 100) * this.totalPrice);
+                    return Math.round((this.coupon.discount / 100) * this.subTotalAmount);
                 }else{
                     return 0;
                 }
@@ -154,12 +152,21 @@ export default {
 
     methods: {
 
+        ...mapMutations({
+            setTotalFee: 'cart/setTotalFee',
+            setDeliveryFee: 'cart/setDeliveryFee',
+            setSubTotalAmount: 'cart/setSubTotalAmount',
+            setValidCoupon: 'cart/setValidCoupon',
+            setCouponDiscount: 'cart/setCouponDiscount',
+        }),
+
         ...mapActions({
             getUserCartItems: 'cart/getUserCartItems',
             addItemsToCart: 'cart/addItemsToCart',
             removeItemFromCart: 'cart/removeItemFromCart',
             clearCart: 'cart/clearCart',
             couponValidate: 'cart/couponValidate',
+            resetAllShoppingMutations: 'cart/resetAllShoppingMutations',
         }),
 
         updateCartItemQty(item){
@@ -181,13 +188,13 @@ export default {
         },
 
         validateCoupon(){
-            this.couponValidate({code: this.coupon_code, total_amount: this.totalPrice}).then((data) => {
+            this.couponValidate({code: this.coupon_code, total_amount: this.subTotalAmount}).then((data) => {
                 console.log(data)
                 this.coupon_data = data.coupon_data
                 if(data.coupon_data.valid) {
-                    store.commit('cart/setTotalFee', this.totalFee)
-                    store.commit('cart/setValidCoupon', this.isValidCoupon)
-                    store.commit('cart/setCouponDiscount', this.getCouponDiscount)
+                    this.setTotalFee(this.totalFee)
+                    this.setValidCoupon(this.isValidCoupon)
+                    this.setCouponDiscount(this.getCouponDiscount)
                 }
                 this.notifSuceess(data.coupon_data.message);
             }).catch((err) => {
@@ -198,6 +205,7 @@ export default {
 
         emptyCart(item){
             this.clearCart().then((data) => {
+                this.resetAllShoppingMutations()
                 this.notifSuceess('Cart cleared successfully');
             }).catch((err) => {
                 this.notifError( err.message || 'An error occurred')
@@ -209,11 +217,6 @@ export default {
 </script>
 
 <style scoped>
-
-.cart-item-image{
-    width: 90px;
-    height: 70px;
-}
 
 .coupon{
 

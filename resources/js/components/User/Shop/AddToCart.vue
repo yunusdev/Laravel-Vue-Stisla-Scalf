@@ -68,6 +68,7 @@ export default {
           item: {
               product_id: this.product.id,
               product_name: this.product.name,
+              product: this.product,
               product_price: this.product.price,
               size: '',
               color: '',

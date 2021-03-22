@@ -4,3 +4,21 @@
 .f-29{
     font-size: 20px;
 }
+
+.cart-item-image{
+    width: 90px;
+    height: 70px;
+}
+
+.invalid-feedback{
+    display: block !important;
+}
+
+.invalid{
+    color: rgba(220,53,69,0.9);
+    background-color: white;
+    margin-top: -15px !important;
+    margin-left: -10px !important;
+    padding-top: 0 !important;
+    margin-bottom: 14px !important;
+}

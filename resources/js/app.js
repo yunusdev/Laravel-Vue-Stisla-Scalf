@@ -57,6 +57,9 @@ Vue.component('product-view', require('./components/User/Shop/ProductView.vue').
 Vue.component('carousel-products', require('./components/User/CarouselProducts.vue').default);
 Vue.component('cart', require('./components/User/Shop/Cart.vue').default);
 Vue.component('checkout', require('./components/User/Shop/Checkout.vue').default);
+Vue.component('user-orders', require('./components/User/Account/UserOrders.vue').default);
+Vue.component('view-user-order', require('./components/User/Account/ViewUserOrder.vue').default);
+Vue.component('user-profile', require('./components/User/Account/UserProfile.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

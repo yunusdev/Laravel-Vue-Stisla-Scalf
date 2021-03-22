@@ -32,7 +32,7 @@ class CartController extends BaseController
     public function getUserCartItems(){
 
         $totalCartAmt = $this->cartRepository->getUserCartTotalAmount();
-        $items =  $this->cartRepository->getUserCartItems(auth()->id(), ['product']);
+        $items =  $this->cartRepository->getUserCartItems(auth()->id() ?? null, ['product']);
 
         return response()->json([
             'total_price' => $totalCartAmt,
@@ -49,12 +49,13 @@ class CartController extends BaseController
                 $cartItems = [];
                 $items = $request['items'];
 
-            foreach ($items as $item){
-                $item['amount'] = $item['product_price'] * $item['quantity'];
-                $cart = $this->cartRepository->addItemToCart($item);
-                $cart = $this->cartRepository->getCartItemById($cart->id, ['product']);
-                array_push($cartItems, $cart);
-            }
+                foreach ($items as $item){
+                    $item['amount'] = $item['product_price'] * $item['quantity'];
+                    $cartItem = $this->cartRepository->addItemToCart($item);
+                    $cartItem['product'] = $item['product'];
+                    array_push($cartItems, $cartItem);
+                }
+
             DB::commit();
             $totalCartAmt = $this->cartRepository->getUserCartTotalAmount();
             return response()->json([
@@ -69,10 +70,9 @@ class CartController extends BaseController
 
     }
 
-    public function removeItem(Request $request, $item){
+    public function removeItem(Request $request, $itemId){
 
-        $this->cartRepository->removeItemFromCart($item);
-
+        $this->cartRepository->removeItemFromCart($itemId);
         $totalCartAmt = $this->cartRepository->getUserCartTotalAmount();
 
         return response()->json([

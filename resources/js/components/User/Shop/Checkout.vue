@@ -105,7 +105,7 @@
                         <table class="table">
                             <tr>
                                 <td>Cart Subtotal:</td>
-                                <td class="text-medium">N{{totalPrice | formatMoney}}</td>
+                                <td class="text-medium">N{{subTotalAmount | formatMoney}}</td>
                             </tr>
                             <tr>
                                 <td>Delivery Fee:</td>
@@ -223,7 +223,7 @@ export default {
         this.getCountries()
         this.getNigerianStates()
         this.setDeliveryFee(0)
-        this.setTotalFee(this.totalPrice - this.couponDiscount)
+        this.setTotalFee(this.subTotalAmount - this.couponDiscount)
         if (this.user) Object.assign(this.order, this.user)
 
     },
@@ -250,7 +250,7 @@ export default {
 
         ...mapGetters({
             cartItems: 'cart/items',
-            totalPrice: 'cart/totalPrice',
+            subTotalAmount: 'cart/subTotalAmount',
             totalFee: 'cart/totalFee',
             validCoupon: 'cart/validCoupon',
             couponDiscount: 'cart/couponDiscount',
@@ -288,11 +288,12 @@ export default {
         ...mapActions({
             getCountries: 'locality/getCountries',
             getNigerianStates: 'locality/getNigerianStates',
+            resetAllShoppingMutations: 'cart/resetAllShoppingMutations',
         }),
 
         ...mapMutations({
-            setDeliveryFee: 'cart/setDeliveryFee',
             setTotalFee: 'cart/setTotalFee',
+            setDeliveryFee: 'cart/setDeliveryFee',
         }),
 
         initiateCheckout(){
@@ -303,7 +304,29 @@ export default {
 
         completeOrder(response){
 
-            console.log(response)
+            this.$http.post('/orders/create', {
+                order: {
+                    ...this.order,
+                    ref: response.reference,
+                    sub_total_amount: this.subTotalAmount,
+                    total_amount: this.totalFee,
+                    delivery_fee: this.deliveryFee,
+                    number_of_items: this.cartItems.length,
+                    coupon_discount: this.couponDiscount,
+                    coupon_id:  this.validCoupon ? this.validCoupon.id : null,
+                },
+                items: this.cartItems,
+
+            }).then(async (res) => {
+                await this.resetAllShoppingMutations()
+                await this.notifSuceess('Your order has been initiated successfully!');
+                console.log(res)
+                window.location = '/shop'
+
+            }).catch(err => {
+
+                console.log(err)
+            })
 
         },
         paymentFailed(response){
@@ -332,12 +355,12 @@ export default {
             if (this.order.state === 'Lagos' && fartherLagosLGA.indexOf(this.order.lga) === -1){
                 this.setDeliveryFee(1500)
             }
-            this.setTotalFee((this.totalPrice + this.deliveryFee) - this.couponDiscount)
+            this.setTotalFee((this.subTotalAmount + this.deliveryFee) - this.couponDiscount)
 
         },
 
         validateCoupon(){
-            this.couponValidate({code: this.coupon_code, total_amount: this.totalPrice}).then((data) => {
+            this.couponValidate({code: this.coupon_code, total_amount: this.subTotalAmount}).then((data) => {
                 console.log(data)
                 this.coupon_data = data.coupon_data
                 if(data.coupon_data.valid) store.commit('cart/setTotalFee', this.totalFee)

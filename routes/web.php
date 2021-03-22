@@ -63,6 +63,10 @@ Route::get('/checkout',
     [App\Http\Controllers\CheckoutController::class, 'index']
 );
 
+Route::post('/orders/create',
+    [App\Http\Controllers\OrderController::class, 'create']
+);
+
 Route::group(['prefix' => 'locality'], function (){
 
     Route::get('/countries',
@@ -90,6 +94,30 @@ Route::group(['middleware'=>'auth'], function() {
     Route::post('/coupon/validate',
         [App\Http\Controllers\CouponController::class, 'validateCoupon']
     );
+
+    Route::group(['prefix' => 'account'], function (){
+
+        Route::get('/user/orders',
+            [App\Http\Controllers\OrderController::class, 'getUserOrders']
+        );
+
+        Route::get('/orders',
+            [App\Http\Controllers\OrderController::class, 'index']
+        );
+
+        Route::get('/orders/{tracking_number}',
+            [App\Http\Controllers\OrderController::class, 'show']
+        );
+
+        Route::get('/profile',
+            [App\Http\Controllers\AccountController::class, 'profile']
+        );
+
+         Route::put('/profile',
+             [App\Http\Controllers\AccountController::class, 'updateProfile']
+         );
+
+    });
 
 });
 
