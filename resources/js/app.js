@@ -60,6 +60,8 @@ Vue.component('checkout', require('./components/User/Shop/Checkout.vue').default
 Vue.component('user-orders', require('./components/User/Account/UserOrders.vue').default);
 Vue.component('view-user-order', require('./components/User/Account/ViewUserOrder.vue').default);
 Vue.component('user-profile', require('./components/User/Account/UserProfile.vue').default);
+Vue.component('user-address', require('./components/User/Account/UserAddress.vue').default);
+Vue.component('user-wishlists', require('./components/User/Account/UserWishlist.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

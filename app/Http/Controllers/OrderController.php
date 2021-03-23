@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\AccountContract;
 use App\Contracts\CartContract;
 use App\Contracts\OrderContract;
 use App\Contracts\OrderItemContract;
@@ -15,15 +16,17 @@ class OrderController extends Controller
 {
     //
 
-    private $orderRepository, $orderItemRepository, $cartRepository, $productRepository;
+    private $orderRepository, $orderItemRepository, $cartRepository, $productRepository, $accountRepository;
 
-    public function __construct(OrderContract $orderRepository, ProductContract $productRepository,
+    public function __construct(OrderContract $orderRepository, ProductContract $productRepository, AccountContract $accountRepository,
                                 OrderItemContract $orderItemRepository, CartContract  $cartRepository)
     {
         $this->orderRepository = $orderRepository;
         $this->orderItemRepository = $orderItemRepository;
         $this->cartRepository = $cartRepository;
         $this->productRepository = $productRepository;
+        $this->productRepository = $productRepository;
+        $this->accountRepository = $accountRepository;
 
     }
 
@@ -57,6 +60,7 @@ class OrderController extends Controller
             $inOrderItems = $request['items'];
 
             $order = $this->orderRepository->createUserOrder($inOrder);
+            $this->accountRepository->updateOrCreateUserAddress($inOrder);
             $orderItems = $this->orderItemRepository->createOrderItems($order, $inOrderItems);
             $this->cartRepository->clearUserCart();
 

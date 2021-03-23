@@ -18,7 +18,7 @@
                             <td>
                                 <div class="product-item">
                                     <a class="product-thumb" :href="'/product/' + item.product.slug">
-                                        <img :src="item.product.front_image" class="cart-item-image" alt="Product">
+                                        <img :src="item.product.front_image" class="cart-item-image" :alt="item.product_name">
                                     </a>
                                     <div class="product-info">
                                         <h4 class="product-title"><a :href="'/product/' + item.product.slug">{{item.product_name}}</a></h4>

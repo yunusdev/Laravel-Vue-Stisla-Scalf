@@ -5,7 +5,7 @@
             <nav-account></nav-account>
             <div class="col-lg-8">
                 <div class="padding-top-2x mt-2 hidden-lg-up"></div>
-                <div class="table-responsive">
+                <div v-if="userOrders.length > 0"  class="table-responsive">
                     <table class="table table-hover margin-bottom-none">
                         <thead>
                         <tr>
@@ -25,8 +25,8 @@
                         </tbody>
                     </table>
                 </div>
-                <hr>
-                <div class="text-right"><a class="btn btn-link-primary margin-bottom-none" href="#"><i class="icon-download"></i>&nbsp;Order Details</a></div>
+                <p v-else>No orders yet.</p>
+
             </div>
         </div>
     </div>

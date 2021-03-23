@@ -117,6 +117,34 @@ Route::group(['middleware'=>'auth'], function() {
              [App\Http\Controllers\AccountController::class, 'updateProfile']
          );
 
+        Route::get('/address',
+            [App\Http\Controllers\AccountController::class, 'address']
+        );
+
+        Route::put('/address',
+            [App\Http\Controllers\AccountController::class, 'updateAddress']
+        );
+
+        Route::get('/wishlist',
+            [App\Http\Controllers\AccountController::class, 'wishlist']
+        );
+
+        Route::get('/user/wishlist',
+            [App\Http\Controllers\AccountController::class, 'userWishlist']
+        );
+
+        Route::put('/wishlist/product/{product}',
+            [App\Http\Controllers\AccountController::class, 'wishlistProduct']
+        );
+
+        Route::delete('/wishlist/product/{product}/remove',
+            [App\Http\Controllers\AccountController::class, 'removeItemFromWishlist']
+        );
+
+        Route::delete('/wishlist/clear',
+            [App\Http\Controllers\AccountController::class, 'wishlistClear']
+        );
+
     });
 
 });

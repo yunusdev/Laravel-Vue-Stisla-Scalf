@@ -5,6 +5,7 @@ export default {
     namespaced: true,
     state: {
         user_orders: [],
+        user_wishlist: [],
         order: null,
     },
 
@@ -12,6 +13,9 @@ export default {
 
         userOrders(state){
             return state.user_orders;
+        },
+        userWishlist(state){
+            return state.user_wishlist;
         },
         order(state){
             return state.order;
@@ -31,11 +35,27 @@ export default {
             })
 
         },
+
+        getUserWishlist({ state, commit }, {reset = false}){
+            if(reset){
+                commit('setUserWishlist', [])
+            }
+            return Axios.get(`/${baseUrl}/user/wishlist`).then(res => {
+                commit('setUserWishlist', res.data)
+                return res.data
+            }).catch(err => {
+                return Promise.reject(err)
+            })
+
+        },
     },
     mutations: {
 
         setUserOrders(state, user_orders){
             return state['user_orders'] = user_orders;
+        },
+        setUserWishlist(state, user_wishlist){
+            return state['user_wishlist'] = user_wishlist;
         },
         setOrder(state, order){
             return state['order'] = order;

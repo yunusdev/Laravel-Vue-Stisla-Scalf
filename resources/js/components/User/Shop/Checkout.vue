@@ -48,13 +48,16 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
+                        <div v-if="isNigeria" class="form-group">
                             <label for="checkout-lg">Local Government</label>
-                            <select v-if="isNigeria" v-model="order.lga"  @change="setDeliveryAmount" required class="form-control" id="checkout-lg">
+                            <select  v-model="order.lga"  @change="setDeliveryAmount" required class="form-control" id="checkout-lg">
                                 <option value="">Select LGA</option>
                                 <option v-show="LGA.length > 0" :value="lga.name" v-for="lga in LGA">{{ lga.name }}</option>
                             </select>
-                            <input v-else v-model="order.lga" required class="form-control" type="text">
+                        </div>
+                        <div v-else class="form-group">
+                            <label for="checkout-lg">City</label>
+                            <input v-model="order.lga" required class="form-control" type="text">
                         </div>
                     </div>
                 </div>
@@ -64,26 +67,6 @@
                             <label for="checkout-address1">Address</label>
                             <input v-model="order.address"  required class="form-control" type="text" id="checkout-address1">
                         </div>
-                    </div>
-                </div>
-                <div v-if="isOrderFilled">
-                    <h4>Payment</h4>
-                    <hr class="padding-bottom-1x">
-                    <div class="form-group">
-                        <p>You have to pay at least <strong>{{payBeforePercentage}}%</strong> of the total amount before the order can be initiated.</p>
-
-                        <!--                    <table class="table">-->
-                        <!--                        <tr>-->
-                        <!--                            <td>Minimum Amount:</td>-->
-                        <!--                            <td class="text-medium">N{{minAmountToPay | formatMoney}}</td>-->
-                        <!--                        </tr>-->
-                        <!--                        <tr>-->
-                        <!--                            <td>Total Fee:</td>-->
-                        <!--                            <td class="text-medium">N{{totalFee}}</td>-->
-                        <!--                        </tr>-->
-                        <!--                    </table>-->
-                        <!--                     <p><span class="text-small">Minimum Amount:</span> <span class="text-primary f-29 font-weight-bold">N{{minAmountToPay | formatMoney}}</span></p>-->
-
                     </div>
                 </div>
                 <div class="checkout-footer">

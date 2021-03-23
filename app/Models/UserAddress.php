@@ -2,10 +2,18 @@
 
 namespace App\Models;
 
+use App\Traits\uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class UserAddress extends Model
 {
-    use HasFactory;
+    use HasFactory, uuids;
+
+    protected $fillable = ['user_id', 'address', 'lga', 'state', 'country'];
+
+    public function user(){
+
+        return $this->belongsTo(User::class);
+
+    }
 }

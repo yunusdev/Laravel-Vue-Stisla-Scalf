@@ -56,7 +56,7 @@ export default {
                 items
             }).then(res => {
 
-                commit('setSubTotalAmount', res.data.total_price)
+                commit('setSubTotalAmount', parseInt(res.data.total_price))
                 const data = res.data.items;
                 data.forEach((newItem) => {
                     const itemIndex = state.items.findIndex((item, index) => item.id === newItem.id)

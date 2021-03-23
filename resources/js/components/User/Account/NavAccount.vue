@@ -13,15 +13,15 @@
         </aside>
         <nav class="list-group">
             <a class="list-group-item with-badge active" href="/account/orders">
-                <i class="icon-bag"></i>Orders<span class="badge badge-primary badge-pill">6</span>
+                <i class="icon-bag"></i>Orders<span class="badge badge-primary badge-pill">{{userOrders.length}}</span>
             </a>
             <a class="list-group-item" href="/account/profile">
                 <i class="icon-head"></i>Profile
             </a>
-            <a class="list-group-item" href="account-address.html"><i class="icon-map"></i>Addresses
+            <a class="list-group-item" href="/account/address"><i class="icon-map"></i>Delivery Address
             </a>
-            <a class="list-group-item with-badge" href="account-wishlist.html">
-                <i class="icon-heart"></i>Wishlist<span class="badge badge-primary badge-pill">3</span>
+            <a class="list-group-item with-badge" href="/account/wishlist">
+                <i class="icon-heart"></i>Wishlist<span class="badge badge-primary badge-pill">{{userWishlist.length}}</span>
             </a>
             <a class="list-group-item with-badge" href="account-tickets.html">
                 <i class="icon-tag"></i>My Tickets<span class="badge badge-primary badge-pill">4</span></a></nav>
@@ -29,8 +29,19 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
-name: "NavAccount"
+    name: "NavAccount",
+
+    computed: {
+
+        ...mapGetters({
+            userWishlist: 'account/userWishlist',
+            userOrders: 'account/userOrders'
+        }),
+
+    },
 }
 </script>
 
