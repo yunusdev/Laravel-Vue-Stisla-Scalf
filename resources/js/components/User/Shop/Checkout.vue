@@ -220,6 +220,7 @@ export default {
             states: 'locality/states',
             countries: 'locality/countries',
             topSellingProducts: 'shop/topSellingProducts',
+            totalQty: 'cart/totalQty'
         }),
 
         isCart(){
@@ -276,7 +277,7 @@ export default {
                     sub_total_amount: this.subTotalAmount,
                     total_amount: this.totalFee,
                     delivery_fee: this.deliveryFee,
-                    number_of_items: this.cartItems.length,
+                    number_of_items: this.totalQty,
                     coupon_discount: this.couponDiscount,
                     coupon_id:  this.validCoupon ? this.validCoupon.id : null,
                 },
@@ -285,11 +286,14 @@ export default {
             }).then(async (res) => {
                 await this.resetAllShoppingMutations()
                 await this.notifSuceess('Your order has been initiated successfully!');
-                console.log(res)
-                window.location = '/shop'
+                if (this.user){
+                    window.location = '/account/orders'
+                }else{
+                    window.location = '/shop'
+                }
 
             }).catch(err => {
-
+                this.notifError('An error occurred while trying to complete your order!. Pls contact us if you have been charged');
                 console.log(err)
             })
 

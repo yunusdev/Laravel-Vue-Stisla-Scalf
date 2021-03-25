@@ -9,15 +9,27 @@ export default {
         coupon_data: null,
         sub_total_amount: 0,
         delivery_fee: 0,
+        // total_qty: 0,
         pay_before_percentage: 60,
         coupon_discount: 0,
         total_fee: null,
     },
 
+    // getTotalQtyFtn(items) {
+    //     return items.reduce((sum, item) =>  {
+    //         return sum + item.quantity
+    //     }, 0);
+    // },
+
     getters: {
 
         items(state){
             return state.items;
+        },
+        totalQty(state){
+            return state.items.reduce((sum, item) =>  {
+                            return parseInt(sum) + parseInt(item.quantity)
+                        }, 0);
         },
         subTotalAmount(state){
             return state.sub_total_amount;
@@ -55,9 +67,10 @@ export default {
             return Axios.post(`/${baseUrl}/add/item`, {
                 items
             }).then(res => {
-
                 commit('setSubTotalAmount', parseInt(res.data.total_price))
                 const data = res.data.items;
+                // console.log(this.getTotalQtyFtn(data))
+                commit('setTotalQty', data)
                 data.forEach((newItem) => {
                     const itemIndex = state.items.findIndex((item, index) => item.id === newItem.id)
                     if (itemIndex >= 0){
@@ -76,6 +89,9 @@ export default {
             })
 
         },
+
+
+
 
         removeItemFromCart({ state, commit }, itemId){
             return Axios.delete(`/${baseUrl}/remove/item/${itemId}`).then(res => {
@@ -114,6 +130,7 @@ export default {
             commit('setCartItems', [])
             commit('setSubTotalAmount', 0)
             commit('setTotalFee', 0)
+            // commit('setTotalQty', 0)
             commit('setValidCoupon', null)
             commit('setCouponDiscount', 0)
             commit('setDeliveryFee', 0)
@@ -130,6 +147,12 @@ export default {
         setTotalFee(state, price){
             return state['total_fee'] = price;
         },
+        // setTotalQty(state, items){
+        //     const qty = items.reduce((sum, item) =>  {
+        //         return sum + item.quantity
+        //     }, 0);
+        //     return state['total_qty'] = qty;
+        // },
         setCouponData(state, coupon_data){
             return state['coupon_data'] = coupon_data;
         },

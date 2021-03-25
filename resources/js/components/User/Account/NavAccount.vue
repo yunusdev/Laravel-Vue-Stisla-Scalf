@@ -2,10 +2,9 @@
     <div class="col-lg-4">
         <aside class="user-info-wrapper">
             <div class="user-cover" style="background-image: url(img/account/user-cover-img.jpg);">
-                <div class="info-label" data-toggle="tooltip" title="You currently have 290 Reward Points to spend"><i class="icon-medal"></i>290 points</div>
             </div>
             <div class="user-info">
-                <div class="user-avatar"><a class="edit-avatar" href="#"></a><img src="img/account/user-ava.jpg" alt="User"></div>
+<!--                <div class="user-avatar"><a class="edit-avatar" href="#"></a><img src="img/account/user-ava.jpg" alt="User"></div>-->
                 <div class="user-data">
                     <h4>{{user.name}}</h4><span>Joined {{ user.formatted_date }}</span>
                 </div>

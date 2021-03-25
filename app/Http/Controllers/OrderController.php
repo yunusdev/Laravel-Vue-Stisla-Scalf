@@ -10,7 +10,10 @@ use App\Contracts\ProductContract;
 use App\Http\Requests\OrderRequest;
 use App\Repositories\OrderRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -60,9 +63,10 @@ class OrderController extends Controller
             $inOrderItems = $request['items'];
 
             $order = $this->orderRepository->createUserOrder($inOrder);
-            $this->accountRepository->updateOrCreateUserAddress($inOrder);
+            if (!Auth::guest()) $this->accountRepository->updateOrCreateUserAddress($inOrder);
             $orderItems = $this->orderItemRepository->createOrderItems($order, $inOrderItems);
             $this->cartRepository->clearUserCart();
+            Cache::put('message_success', 'Order completed successfully!', now()->addSeconds(10));
 
             DB::commit();
 

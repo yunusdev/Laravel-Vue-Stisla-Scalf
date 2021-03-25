@@ -21,7 +21,8 @@
             </div>
         </div>
     </div>
-    <!-- Page Content-->
+    @include('includes.status_message')
+
     <user-orders raw_user="{{auth()->user()}}" raw_url="{{$url}}"></user-orders>
 
 @endsection

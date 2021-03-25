@@ -37,6 +37,9 @@
         </div>
     </div>
     <!-- Page Content-->
+
+    @include('includes.status_message')
+
     <shop raw_products="{{$products}}" raw_category="{{$category ?? ''}}" raw_sub_category="{{$sub_category ?? ''}}">
 
 @endsection

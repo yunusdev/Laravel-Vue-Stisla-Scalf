@@ -72,7 +72,6 @@
             <div class="shopping-cart-footer">
                 <div class="column"><a class="btn btn-outline-secondary" href="/shop"><i class="icon-arrow-left"></i>&nbsp;Back to Shopping</a></div>
                 <div class="column">
-                    <a class="btn btn-primary" href="#">Update Cart</a>
                     <a class="btn btn-success" href="/checkout">Checkout</a></div>
             </div>
         </div>
@@ -123,7 +122,8 @@ export default {
             subTotalAmount: 'cart/subTotalAmount',
             validCoupon: 'cart/validCoupon',
             couponDiscount: 'cart/couponDiscount',
-            trendingProducts: 'shop/trendingProducts'
+            trendingProducts: 'shop/trendingProducts',
+            totalQty: 'cart/totalQty'
             // totalFee: 'cart/totalFee',
         }),
 
