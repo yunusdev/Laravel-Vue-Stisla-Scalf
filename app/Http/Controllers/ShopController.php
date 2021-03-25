@@ -21,8 +21,6 @@ class ShopController extends Controller
     public function index(){
 
         $data['products'] = $this->productRepository->getProducts();
-        $data['categories'] = $this->categoryRepository->getCategoriesSubCategories();
-
         return view('shop.index')->with($data);
 
     }
@@ -33,6 +31,29 @@ class ShopController extends Controller
 //        $this->productRepository->incrementProductViewCount($data['product']);
         $data['related_products'] = $this->productRepository->getRelatedProducts($data['product']);
         return view('shop.product-view')->with($data);
+
+    }
+
+    public function getCategories(){
+
+        return $this->categoryRepository->getCategoriesSubCategories();
+    }
+
+    public function trendingProducts(){
+
+        return $this->productRepository->getTrendingProducts();
+
+    }
+
+    public function topSellingProducts($num = 3){
+
+        return $this->productRepository->getTopSellingProducts(intval($num));
+
+    }
+
+    public function newArrivalsProducts(){
+
+        return $this->productRepository->getNewArrivalsProducts();
 
     }
 }

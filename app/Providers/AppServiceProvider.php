@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,5 +25,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        $url['base'] = env('APP_URL');
+        $url['current'] = url()->current();
+        View::share('url', json_encode($url));
     }
 }

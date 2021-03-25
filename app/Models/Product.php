@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory, Searchable;
 
-    protected $appends = ['formatted_date', 'sizes', 'colors', 'is_wishlisted'];
+    protected $appends = ['formatted_date', 'order_items_count', 'sizes', 'colors', 'is_wishlisted'];
 
     public function category(){
 
@@ -26,6 +26,18 @@ class Product extends Model
     public function productImages(){
 
         return $this->hasMany(ProductsImage::class);
+
+    }
+
+    public function orderItems(){
+
+        return $this->hasMany(OrderItem::class);
+
+    }
+
+    public function getOrderItemsCountAttribute(){
+
+        return $this->orderItems()->count();
 
     }
 

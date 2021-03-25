@@ -7,20 +7,20 @@
             <div class="user-info">
                 <div class="user-avatar"><a class="edit-avatar" href="#"></a><img src="img/account/user-ava.jpg" alt="User"></div>
                 <div class="user-data">
-                    <h4>Daniel Adams</h4><span>Joined February 06, 2017</span>
+                    <h4>{{user.name}}</h4><span>Joined {{ user.formatted_date }}</span>
                 </div>
             </div>
         </aside>
         <nav class="list-group">
-            <a class="list-group-item with-badge active" href="/account/orders">
+            <a class="list-group-item with-badge" :class="isActiveUrl('/account/orders')" href="/account/orders">
                 <i class="icon-bag"></i>Orders<span class="badge badge-primary badge-pill">{{userOrders.length}}</span>
             </a>
-            <a class="list-group-item" href="/account/profile">
+            <a class="list-group-item" :class="isActiveUrl('/account/profile')" href="/account/profile">
                 <i class="icon-head"></i>Profile
             </a>
-            <a class="list-group-item" href="/account/address"><i class="icon-map"></i>Delivery Address
+            <a class="list-group-item" :class="isActiveUrl('/account/address')" href="/account/address"><i class="icon-map"></i>Delivery Address
             </a>
-            <a class="list-group-item with-badge" href="/account/wishlist">
+            <a class="list-group-item with-badge" :class="isActiveUrl('/account/wishlist')" href="/account/wishlist">
                 <i class="icon-heart"></i>Wishlist<span class="badge badge-primary badge-pill">{{userWishlist.length}}</span>
             </a>
             <a class="list-group-item with-badge" href="account-tickets.html">
@@ -34,6 +34,17 @@ import {mapGetters} from "vuex";
 export default {
     name: "NavAccount",
 
+    props: ['raw_url', 'user'],
+
+    data(){
+
+        return {
+
+            url: this.raw_url ? JSON.parse(this.raw_url) : null
+
+        }
+    },
+
     computed: {
 
         ...mapGetters({
@@ -42,6 +53,13 @@ export default {
         }),
 
     },
+
+    methods: {
+        isActiveUrl(url){
+            return this.url.base + url === this.url.current ? 'active' : ''
+        },
+
+    }
 }
 </script>
 

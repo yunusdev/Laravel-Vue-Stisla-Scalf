@@ -1,7 +1,7 @@
 <template>
     <div class="container padding-bottom-3x mb-2">
         <div class="row">
-            <nav-account></nav-account>
+            <nav-account :user="user" :raw_url="raw_url"></nav-account>
             <div class="col-lg-8">
                 <div class="padding-top-2x mt-2 hidden-lg-up"></div>
                 <div class="table-responsive wishlist-table margin-bottom-none">
@@ -40,23 +40,45 @@
                         </tr>
                         </tbody>
                     </table>
-                    <div class="shopping-cart-footer">
+                    <div class=" float-right col-md-5">
+                        <section class="widget widget-order-summary">
+                            <table class="table">
+                                <tr>
+                                    <td>Cart Subtotal:</td>
+                                    <td class="text-medium">N{{order.sub_total_amount | formatMoney}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Delivery Fee:</td>
+                                    <td class="text-small">N{{order.delivery_fee | formatMoney}}</td>
+                                </tr>
+                                <tr v-if="order.coupon_id">
+                                    <td>Discount:</td>
+                                    <td class="text-small text-danger">{{order.coupon_discount}}% off</td>
+                                </tr>
 
-                    <div class="column text-lg">
-                        Subtotal: <span class="text-medium">N{{order.sub_total_amount | formatMoney}}</span>
-                        Delivery Fee: <span class="text-medium">N{{order.delivery_fee | formatMoney}}</span>
-                        <div class="mt-2 mb-2" v-if="order.coupon_id">
-                            <span class="">Discount:
-                                <span class="text-small text-danger">
-                                    {{order.coupon_discount}}% off
-                                </span>
-                            </span>
-                        </div>
+                                <tr>
+                                    <td></td>
+                                    <td class="text-lg text-medium">N{{order.total_amount | formatMoney}}</td>
+                                </tr>
+                            </table>
+                        </section>
 
-                        <span class="">
-                            Total Price: <span class="text-medium">N{{order.total_amount | formatMoney}}</span>
-                        </span>
-                    </div>
+
+<!--                        <div class="column text-lg">-->
+<!--                        Subtotal: <span class="text-medium">N{{order.sub_total_amount | formatMoney}}</span>-->
+<!--                        Delivery Fee: <span class="text-medium">N{{order.delivery_fee | formatMoney}}</span>-->
+<!--                        <div class="mt-2 mb-2" v-if="order.coupon_id">-->
+<!--                            <span class="">Discount:-->
+<!--                                <span class="text-small text-danger">-->
+<!--                                    {{order.coupon_discount}}% off-->
+<!--                                </span>-->
+<!--                            </span>-->
+<!--                        </div>-->
+
+<!--                        <span class="">-->
+<!--                            Total Price: <span class="text-medium">N{{order.total_amount | formatMoney}}</span>-->
+<!--                        </span>-->
+<!--                    </div>-->
                     </div>
 
 
@@ -77,13 +99,14 @@ export default {
 
     components: {NavAccount},
 
-    props: ['raw_order'],
+    props: ['raw_order', 'raw_url', 'raw_user'],
 
     data(){
 
         return {
 
-            order: JSON.parse(this.raw_order)
+            order: JSON.parse(this.raw_order),
+            user: JSON.parse(this.raw_user),
 
         }
     },

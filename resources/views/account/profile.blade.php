@@ -22,6 +22,6 @@
         </div>
     </div>
     <!-- Page Content-->
-    <user-profile raw_user="{{auth()->user()}}"></user-profile>
+    <user-profile raw_url="{{$url}}" raw_user="{{auth()->user()}}"></user-profile>
 
 @endsection

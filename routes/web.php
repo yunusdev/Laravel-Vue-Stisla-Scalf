@@ -19,9 +19,30 @@ Route::get('/',
     [App\Http\Controllers\HomeController::class, 'index']
 )->name('home');
 
-Route::get('/shop',
-    [App\Http\Controllers\ShopController::class, 'index']
-)->name('shop');
+Route::group(['prefix' => 'shop'], function (){
+
+    Route::get('/',
+        [App\Http\Controllers\ShopController::class, 'index']
+    )->name('shop');
+
+     Route::get('/categories',
+         [App\Http\Controllers\ShopController::class, 'getCategories']
+     );
+
+    Route::get('/trending/products',
+        [App\Http\Controllers\ShopController::class, 'trendingProducts']
+    );
+
+    Route::get('/top/sellers/{num?}',
+        [App\Http\Controllers\ShopController::class, 'topSellingProducts']
+    );
+
+    Route::get('/new/arrivals',
+        [App\Http\Controllers\ShopController::class, 'newArrivalsProducts']
+    );
+
+});
+
 
 Route::get('/category/{slug}/products',
     [App\Http\Controllers\CategoriesController::class, 'categoryProducts']

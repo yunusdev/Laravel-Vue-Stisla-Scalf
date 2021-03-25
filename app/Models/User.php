@@ -14,6 +14,7 @@ class User extends Authenticatable
 
     public $incrementing = false;
 
+    protected $appends = ['formatted_date'];
 
     /**
      * The attributes that are mass assignable.
@@ -56,6 +57,12 @@ class User extends Authenticatable
     public function wishlists(){
 
         return $this->belongsToMany(Product::class, 'wishlists')->withTimestamps();
+
+    }
+
+    public function getFormattedDateAttribute(){
+
+        return $this->created_at->format('F dS, Y');
 
     }
 }

@@ -1,11 +1,10 @@
 <template>
     <div class="container padding-bottom-3x mb-2">
         <div class="row">
-            <nav-account></nav-account>
+            <nav-account :raw_url="raw_url" :user="user"></nav-account>
             <div class="col-lg-8">
-                <h4>Delivery Address</h4>
-                <hr class="padding-bottom-1x">
-                <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+                <h4 class="mt-3">Delivery Address</h4>
+                <hr class="mb-4">
                 <form v-if="userAddress" @submit.prevent="updateAddress" class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -78,7 +77,7 @@ class Address{
 export default {
     name: "UserAddress",
 
-    props: ['raw_user'],
+    props: ['raw_user', 'raw_url'],
 
     components: {NavAccount},
 
@@ -98,8 +97,8 @@ export default {
     },
 
     async mounted() {
-        await this.getCountries()
-        await this.getNigerianStates()
+        await this.getCountries({})
+        await this.getNigerianStates({})
         this.userAddress = new Address(this.user.address)
         const state = this.states.find((state) => state.name === this.user.address.state)
         this.state = state

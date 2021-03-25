@@ -12,7 +12,6 @@
                 $base_url = env('APP_URL');
                 return $base_url . $url === $current_url ? 'active' : '';
             }
-
         @endphp
         <ul class="sidebar-menu">
             <li class="{{isActiveUrl('/admin/home')}}"><a class="nav-link" href="{{route('admin.home')}}"><i class="fas fa-home"></i> <span>Home</span></a></li>

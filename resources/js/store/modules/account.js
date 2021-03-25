@@ -24,8 +24,8 @@ export default {
 
     actions: {
         getUserOrders({ state, commit }, {reset = false}){
-            if(reset){
-                commit('setUserOrders', [])
+            if(!reset && state.user_orders.length > 0){
+                return;
             }
             return Axios.get(`/${baseUrl}/user/orders`).then(res => {
                 commit('setUserOrders', res.data)
@@ -37,8 +37,8 @@ export default {
         },
 
         getUserWishlist({ state, commit }, {reset = false}){
-            if(reset){
-                commit('setUserWishlist', [])
+            if(!reset && state.user_wishlist.length > 0){
+                return;
             }
             return Axios.get(`/${baseUrl}/user/wishlist`).then(res => {
                 commit('setUserWishlist', res.data)

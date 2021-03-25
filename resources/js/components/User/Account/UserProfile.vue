@@ -1,11 +1,10 @@
 <template>
     <div class="container padding-bottom-3x mb-2">
         <div class="row">
-            <nav-account></nav-account>
+            <nav-account :raw_url="raw_url" :user="user"></nav-account>
             <div class="col-lg-8">
-                <h4>Profile</h4>
-                <hr class="padding-bottom-1x">
-                <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+                <h4 class="mt-3">Profile</h4>
+                <hr class="mb-4">
                 <form v-if="user" @submit.prevent="updateProfile" class="row">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -47,11 +46,8 @@
                         </div>
                     </div>
                     <div class="col-12">
-<!--                        <hr class="mt-2 mb-3">-->
                         <div class="d-flex flex-wrap justify-content-between align-items-center">
                             <div class="custom-control custom-checkbox d-block">
-                                <input class="custom-control-input" type="checkbox" id="subscribe_me" checked>
-                                <label class="custom-control-label" for="subscribe_me">Subscribe me to Newsletter</label>
                             </div>
                             <button class="btn btn-primary margin-right-none" type="submit">Update Profile</button>
                         </div>
@@ -81,7 +77,7 @@ class User{
 export default {
     name: "UserProfile",
 
-    props: ['raw_user'],
+    props: ['raw_user', 'raw_url'],
 
     components: {NavAccount},
 

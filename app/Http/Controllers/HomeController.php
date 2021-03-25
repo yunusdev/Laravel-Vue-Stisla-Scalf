@@ -29,8 +29,7 @@ class HomeController extends Controller
             $category['top_products'] = $this->productRepository->getTopCategoryProducts($category->id);
         }
         $data['top_categories'] = $categories;
-        $data['trending_products'] = $this->productRepository->getTrendingProducts();
-
         return view('welcome')->with($data);
     }
+
 }

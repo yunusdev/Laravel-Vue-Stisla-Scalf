@@ -22,6 +22,6 @@
         </div>
     </div>
     <!-- Page Content-->
-    <user-address raw_user="{{$user}}"></user-address>
+    <user-address raw_url="{{$url}}" raw_user="{{$user}}"></user-address>
 
 @endsection

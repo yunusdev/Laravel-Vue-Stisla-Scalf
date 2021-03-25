@@ -22,6 +22,6 @@
         </div>
     </div>
     <!-- Page Content-->
-    <user-orders></user-orders>
+    <user-orders raw_user="{{auth()->user()}}" raw_url="{{$url}}"></user-orders>
 
 @endsection

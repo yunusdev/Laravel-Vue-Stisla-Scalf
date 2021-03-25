@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="column">
-                            <div class="shop-view"><a class="grid-view active" href="shop-grid-ls.html"><span></span><span></span><span></span></a><a class="list-view" href="shop-list-ls.html"><span></span><span></span><span></span></a></div>
+<!--                            <div class="shop-view"><a class="grid-view active" href="shop-grid-ls.html"><span></span><span></span><span></span></a><a class="list-view" href="shop-list-ls.html"><span></span><span></span><span></span></a></div>-->
                         </div>
                     </div>
                     <!-- Products Grid-->
@@ -149,6 +149,7 @@
 
 <script>
 import Product from "./Product";
+import {mapMutations, mapActions, mapGetters} from 'vuex'
 export default {
     name: "Shop",
 
@@ -160,10 +161,36 @@ export default {
 
         return {
             products: JSON.parse(this.raw_products),
-            categories: JSON.parse(this.raw_categories),
+            // categories: JSON.parse(this.raw_categories),
             category: this.raw_category ? JSON.parse(this.raw_category): null,
             sub_category: this.raw_sub_category ? JSON.parse(this.raw_sub_category) : null
         }
+
+    },
+
+    async mounted() {
+
+        await this.getCategories({})
+
+    },
+
+    computed: {
+
+        ...mapGetters({
+
+            categories: 'shop/categories'
+
+        })
+
+    },
+
+    methods: {
+
+        ...mapActions({
+
+            getCategories: 'shop/getCategories'
+
+        })
 
     }
 

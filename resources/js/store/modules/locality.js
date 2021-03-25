@@ -18,7 +18,10 @@ export default {
     },
 
     actions: {
-        getCountries({ state, commit }){
+        getCountries({ state, commit }, {reset = false}){
+            if(!reset && state.countries.length > 0){
+                return;
+            }
             return Axios.get(`/${baseUrl}/countries`).then(res => {
                 commit('setCountries', res.data)
                 return res.data
@@ -27,7 +30,10 @@ export default {
             })
 
         },
-        getNigerianStates({ state, commit }){
+        getNigerianStates({ state, commit }, {reset = false}){
+            if(!reset && state.states.length > 0){
+                return;
+            }
             return Axios.get(`/${baseUrl}/nigerian/states`).then(res => {
                 commit('setStates', res.data)
                 return res.data

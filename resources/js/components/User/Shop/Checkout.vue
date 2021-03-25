@@ -2,88 +2,93 @@
     <!-- Page Content-->
     <div class="container padding-bottom-3x mb-2">
         <div class="row">
-            <form @submit.prevent="initiateCheckout" class="col-xl-9 col-lg-8">
-                <h4>Shipping Information</h4>
-                <hr class="padding-bottom-1x">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="checkout-fn">Name</label>
-                            <input v-model="order.name" required class="form-control" type="text" id="checkout-fn">
+            <div class="col-xl-9 col-lg-8">
+                <form v-if="isCart"  @submit.prevent="initiateCheckout" >
+                    <h4>Shipping Information</h4>
+                    <hr class="padding-bottom-1x">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="checkout-fn">Name</label>
+                                <input v-model="order.name" required class="form-control" type="text" id="checkout-fn">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="checkout-email">E-mail Address</label>
+                                <input v-model="order.email" required class="form-control" type="email" id="checkout-email">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="checkout-email">E-mail Address</label>
-                            <input v-model="order.email" required class="form-control" type="email" id="checkout-email">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="checkout-phone">Phone Number</label>
+                                <input v-model="order.phone" required class="form-control" type="text" id="checkout-phone">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="checkout-country">Country</label>
+                                <select v-model="order.country"  @change="setDeliveryAmount" required class="form-control" id="checkout-country">
+                                    <option value="">Select country</option>
+                                    <option :value="country.name" v-for="country in countries">{{ country.name }}</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="checkout-phone">Phone Number</label>
-                            <input v-model="order.phone" required class="form-control" type="text" id="checkout-phone">
+                    <div class="row" >
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="checkout-city">State</label>
+                                <select v-if="isNigeria" v-model="state" required class="form-control" id="checkout-city">
+                                    <option value="">Select State</option>
+                                    <option :value="state" v-for="state in states">{{ state.name }}</option>
+                                </select>
+                                <input v-else v-model="order.state" required class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div v-if="isNigeria" class="form-group">
+                                <label for="checkout-lg">Local Government</label>
+                                <select  v-model="order.lga"  @change="setDeliveryAmount" required class="form-control" id="checkout-lg">
+                                    <option value="">Select LGA</option>
+                                    <option v-show="LGA.length > 0" :value="lga.name" v-for="lga in LGA">{{ lga.name }}</option>
+                                </select>
+                            </div>
+                            <div v-else class="form-group">
+                                <label for="checkout-lg">City</label>
+                                <input v-model="order.lga" required class="form-control" type="text">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="checkout-country">Country</label>
-                            <select v-model="order.country"  @change="setDeliveryAmount" required class="form-control" id="checkout-country">
-                                <option value="">Select country</option>
-                                <option :value="country.name" v-for="country in countries">{{ country.name }}</option>
-                            </select>
+                    <div class="row padding-bottom-1x">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="checkout-address1">Address</label>
+                                <input v-model="order.address"  required class="form-control" type="text" id="checkout-address1">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row" >
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="checkout-city">State</label>
-                            <select v-if="isNigeria" v-model="state" required class="form-control" id="checkout-city">
-                                <option value="">Select State</option>
-                                <option :value="state" v-for="state in states">{{ state.name }}</option>
-                            </select>
-                            <input v-else v-model="order.state" required class="form-control" type="text">
+                    <div class="checkout-footer">
+                        <div class="column"><a class="btn btn-outline-secondary" href="/cart"><i class="icon-arrow-left"></i><span class="hidden-xs-down">&nbsp;Back To Cart</span></a></div>
+                        <div class="column">
+                            <button type="submit" class="btn btn-primary">
+                                <span class="">Pay&nbsp;</span>
+                                <i class="icon-arrow-right"></i>
+                            </button>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div v-if="isNigeria" class="form-group">
-                            <label for="checkout-lg">Local Government</label>
-                            <select  v-model="order.lga"  @change="setDeliveryAmount" required class="form-control" id="checkout-lg">
-                                <option value="">Select LGA</option>
-                                <option v-show="LGA.length > 0" :value="lga.name" v-for="lga in LGA">{{ lga.name }}</option>
-                            </select>
-                        </div>
-                        <div v-else class="form-group">
-                            <label for="checkout-lg">City</label>
-                            <input v-model="order.lga" required class="form-control" type="text">
-                        </div>
-                    </div>
-                </div>
-                <div class="row padding-bottom-1x">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="checkout-address1">Address</label>
-                            <input v-model="order.address"  required class="form-control" type="text" id="checkout-address1">
-                        </div>
-                    </div>
-                </div>
-                <div class="checkout-footer">
-                    <div class="column"><a class="btn btn-outline-secondary" href="/cart"><i class="icon-arrow-left"></i><span class="hidden-xs-down">&nbsp;Back To Cart</span></a></div>
-                    <div class="column">
-                        <button type="submit" class="btn btn-primary">
-                            <span class="">Pay&nbsp;</span>
-                            <i class="icon-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
+                </form>
+
+                <p class="f-17" v-else>No items in your cart. Go to the <a href="/shop">shop</a> to add items to the cart.</p>
+
+            </div>
             <div class="col-xl-3 col-lg-4">
                 <aside class="sidebar">
                     <div class="padding-top-2x hidden-lg-up"></div>
                     <!-- Order Summary Widget-->
-                    <section class="widget widget-order-summary">
+                    <section v-if="isCart"  class="widget widget-order-summary">
                         <h3 class="widget-title">Order Summary</h3>
                         <table class="table">
                             <tr>
@@ -106,37 +111,8 @@
                         </table>
                     </section>
                     <!-- Featured Products Widget-->
-                    <section class="widget widget-featured-products">
-                        <h3 class="widget-title">Recently Viewed</h3>
-                        <!-- Entry-->
-                        <div class="entry">
-                            <div class="entry-thumb"><a href="shop-single.html"><img src="img/shop/widget/01.jpg" alt="Product"></a></div>
-                            <div class="entry-content">
-                                <h4 class="entry-title"><a href="shop-single.html">Oakley Kickback</a></h4><span class="entry-meta">$155.00</span>
-                            </div>
-                        </div>
-                        <!-- Entry-->
-                        <div class="entry">
-                            <div class="entry-thumb"><a href="shop-single.html"><img src="img/shop/widget/02.jpg" alt="Product"></a></div>
-                            <div class="entry-content">
-                                <h4 class="entry-title"><a href="shop-single.html">Top-Sider Fathom</a></h4><span class="entry-meta">$90.00</span>
-                            </div>
-                        </div>
-                        <!-- Entry-->
-                        <div class="entry">
-                            <div class="entry-thumb"><a href="shop-single.html"><img src="img/shop/widget/03.jpg" alt="Product"></a></div>
-                            <div class="entry-content">
-                                <h4 class="entry-title"><a href="shop-single.html">Vented Straw Fedora</a></h4><span class="entry-meta">$49.50</span>
-                            </div>
-                        </div>
-                        <!-- Entry-->
-                        <div class="entry">
-                            <div class="entry-thumb"><a href="shop-single.html"><img src="img/shop/widget/04.jpg" alt="Product"></a></div>
-                            <div class="entry-content">
-                                <h4 class="entry-title"><a href="shop-single.html">Big Wordmark Tote</a></h4><span class="entry-meta">$29.99</span>
-                            </div>
-                        </div>
-                    </section>
+                    <product-widget :title="'TOP SELLERS'" :products="topSellingProducts"></product-widget>
+
                     <!-- Promo Banner-->
                     <section class="promo-box" style="background-image: url(img/banners/02.jpg);"><span class="overlay-dark" style="opacity: .4;"></span>
                         <div class="promo-box-content text-center padding-top-2x padding-bottom-2x">
@@ -165,6 +141,7 @@
 import {mapGetters, mapActions, mapMutations} from "vuex";
 import store from "../../../store";
 import Paystack from "../Paystack";
+import ProductWidget from "./ProductWidget";
 class Order {
 
     constructor(order) {
@@ -185,7 +162,7 @@ export default {
 
     props: ['raw_user', 'paystack_pk'],
 
-    components: {Paystack},
+    components: {Paystack, ProductWidget},
 
     data(){
 
@@ -203,11 +180,12 @@ export default {
 
     mounted() {
 
-        this.getCountries()
-        this.getNigerianStates()
+        this.getCountries({})
+        this.getNigerianStates({})
         this.setDeliveryFee(0)
         this.setTotalFee(this.subTotalAmount - this.couponDiscount)
         if (this.user) Object.assign(this.order, this.user)
+        this.getTopSellingProducts({num: 5})
 
     },
 
@@ -241,10 +219,12 @@ export default {
             payBeforePercentage: 'cart/payBeforePercentage',
             states: 'locality/states',
             countries: 'locality/countries',
-            // isValidCoupon: 'cart/isValidCoupon',
-            // coupon: 'cart/coupon',
-            // getCouponDiscount: 'cart/getCouponDiscount',
+            topSellingProducts: 'shop/topSellingProducts',
         }),
+
+        isCart(){
+            return this.cartItems.length > 0
+        },
 
         isNigeria(){
 
@@ -272,6 +252,8 @@ export default {
             getCountries: 'locality/getCountries',
             getNigerianStates: 'locality/getNigerianStates',
             resetAllShoppingMutations: 'cart/resetAllShoppingMutations',
+            getTopSellingProducts: 'shop/getTopSellingProducts',
+
         }),
 
         ...mapMutations({

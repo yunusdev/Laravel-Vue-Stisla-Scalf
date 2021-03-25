@@ -22,6 +22,6 @@
         </div>
     </div>
     <!-- Page Content-->
-    <user-wishlists raw_user="{{auth()->user()}}"></user-wishlists>
+    <user-wishlists raw_url="{{$url}}" raw_user="{{auth()->user()}}"></user-wishlists>
 
 @endsection

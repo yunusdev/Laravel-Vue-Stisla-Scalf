@@ -14,7 +14,7 @@ export default {
 
     name: "CarouselProducts",
 
-    props: ['raw_products'],
+    props: ['raw_products', 'products'],
 
     components: {Product},
 
@@ -22,9 +22,13 @@ export default {
 
         return {
 
-            products: JSON.parse(this.raw_products),
+            // prods: this.products ? this.products : JSON.parse(this.raw_products),
 
         }
+
+    },
+
+    mounted() {
 
     }
 

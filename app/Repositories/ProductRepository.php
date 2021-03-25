@@ -54,6 +54,18 @@ class ProductRepository extends BaseRepository implements ProductContract
 
     }
 
+    public function getTopSellingProducts(int $num = 3)
+    {
+        return $this->model->get()->sortByDesc('order_items_count')->take($num)->values();
+
+    }
+
+    public function getNewArrivalsProducts(int $num = 3)
+    {
+        return $this->model->latest()->take($num)->get();
+    }
+
+
     public function getProductsBy(array $data, array $relationship = [])
     {
         return $this->findByWhere($data, $relationship);
@@ -115,8 +127,6 @@ class ProductRepository extends BaseRepository implements ProductContract
     {
         try {
             $params = $this->handleImageUpload($params);
-            Log::debug($params);
-            Log::debug($params);
             $images = $params['images'];
             unset($params['images']);
 

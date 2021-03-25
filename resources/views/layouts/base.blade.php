@@ -35,8 +35,7 @@
     <div id="app">
 
         {{--@include('layouts.header')--}}
-        <nav-bar raw_user="{{auth()->user()}}"></nav-bar>
-
+        <nav-bar raw_url="{{$url}}" raw_user="{{auth()->user()}}"></nav-bar>
         <div class="offcanvas-wrapper">
             <!-- Page Content-->
             @yield('content')

@@ -37,7 +37,6 @@
         </div>
     </div>
     <!-- Page Content-->
-    <shop raw_products="{{$products}}" raw_category="{{$category ?? ''}}" raw_sub_category="{{$sub_category ?? ''}}"
-          raw_categories = "{{$categories}}">
+    <shop raw_products="{{$products}}" raw_category="{{$category ?? ''}}" raw_sub_category="{{$sub_category ?? ''}}">
 
 @endsection

@@ -9,67 +9,14 @@
             </div>
             <nav class="offcanvas-menu">
                 <ul class="menu">
-                    <li class="has-children"><span><a href="#">Men's Shoes</a><span class="sub-menu-toggle"></span></span>
+                    <li v-for="category in categories" :key="category.id" class="has-children">
+                        <span><a :href="`/category/${category.slug}/products`">{{category.name}}</a>
+                            <span class="sub-menu-toggle"></span>
+                        </span>
                         <ul class="offcanvas-submenu">
-                            <li><a href="#">Sneakers</a></li>
-                            <li><a href="#">Loafers</a></li>
-                            <li><a href="#">Boat Shoes</a></li>
-                            <li><a href="#">Sandals</a></li>
-                            <li><a href="#">View All</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-children"><span><a href="#">Women's Shoes</a><span class="sub-menu-toggle"></span></span>
-                        <ul class="offcanvas-submenu">
-                            <li><a href="#">Sandals</a></li>
-                            <li><a href="#">Flats</a></li>
-                            <li><a href="#">Sneakers</a></li>
-                            <li><a href="#">Heels</a></li>
-                            <li><a href="#">View All</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-children"><span><a href="#">Men's Clothing</a><span class="sub-menu-toggle"></span></span>
-                        <ul class="offcanvas-submenu">
-                            <li><a href="#">Shirts &amp; Tops</a></li>
-                            <li><a href="#">Pants</a></li>
-                            <li><a href="#">Jackets</a></li>
-                            <li><a href="#">View All</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-children"><span><a href="#">Women's Clothing</a><span class="sub-menu-toggle"></span></span>
-                        <ul class="offcanvas-submenu">
-                            <li><a href="#">Dresses</a></li>
-                            <li><a href="#">Shirts &amp; Tops</a></li>
-                            <li><a href="#">Shorts</a></li>
-                            <li><a href="#">Swimwear</a></li>
-                            <li><a href="#">View All</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-children"><span><a href="#">Kid's Shoes</a><span class="sub-menu-toggle"></span></span>
-                        <ul class="offcanvas-submenu">
-                            <li><a href="#">Boots</a></li>
-                            <li><a href="#">Sandals</a></li>
-                            <li><a href="#">Crib Shoes</a></li>
-                            <li><a href="#">Loafers</a></li>
-                            <li><a href="#">View All</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-children"><span><a href="#">Bags</a><span class="sub-menu-toggle"></span></span>
-                        <ul class="offcanvas-submenu">
-                            <li><a href="#">Handbags</a></li>
-                            <li><a href="#">Backpacks</a></li>
-                            <li><a href="#">Luggage</a></li>
-                            <li><a href="#">Wallets</a></li>
-                            <li><a href="#">View All</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-children"><span><a href="#">Accessories</a><span class="sub-menu-toggle"></span></span>
-                        <ul class="offcanvas-submenu">
-                            <li><a href="#">Sunglasses</a></li>
-                            <li><a href="#">Hats</a></li>
-                            <li><a href="#">Watches</a></li>
-                            <li><a href="#">Jewelry</a></li>
-                            <li><a href="#">Belts</a></li>
-                            <li><a href="#">View All</a></li>
+                            <li v-for="sub_cat in category.sub_categories" :key="sub_cat.id">
+                                <a :href="`/sub-category/${sub_cat.slug}/products`">{{ sub_cat.name }}</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -272,11 +219,6 @@
             </div>
         </div>
         <header class="navbar navbar-sticky">
-            <!-- Search-->
-            <form class="site-search" method="get">
-                <input type="text" name="site_search" placeholder="Type to search...">
-                <div class="search-tools"><span class="clear-search">Clear</span><span class="close-search"><i class="icon-cross"></i></span></div>
-            </form>
             <div class="site-branding">
                 <div class="inner">
                     <a class="offcanvas-toggle cats-toggle" href="#shop-categories" data-toggle="offcanvas"></a>
@@ -287,27 +229,17 @@
                     </a>
                 </div>
             </div>
-            <!-- Main Navigation-->
             <nav class="site-menu">
                 <ul>
-                    <li class="has-megamenu active">
+                    <li class="has-megamenu" :class="isActiveUrl('')">
                         <a href="/"><span>Home</span></a>
                     </li>
-                    <li><a href="/shop"><span>Shop</span></a>
-                        <ul class="sub-menu">
-                            <li class="has-children"><a href="shop-grid-ls.html"><span>Shop Grid</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="shop-grid-ls.html">Grid Left Sidebar</a></li>
-                                    <li><a href="shop-grid-rs.html">Grid Right Sidebar</a></li>
-                                    <li><a href="shop-grid-ns.html">Grid No Sidebar</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                    <li :class="isActiveUrl('/shop')"><a href="/shop" ><span>Shop</span></a>
                     </li>
-                    <li class="has-megamenu active">
+                    <li class="has-megamenu" :class="isActiveUrl('/cart')">
                         <a href="/cart"><span>Cart</span></a>
                     </li>
-                    <li v-if="user" class="has-megamenu active">
+                    <li v-if="user" class="has-megamenu" :class="isActiveUrl('/account/orders')">
                         <a href="/account/orders"><span>Orders</span></a>
                     </li>
                 </ul>
@@ -316,30 +248,29 @@
             <div class="toolbar">
                 <div class="inner">
                     <div class="tools">
-                        <div class="search"><i class="icon-search"></i></div>
                         <div class="account"><a href="#"></a><i class="icon-head"></i>
                             <ul class="toolbar-dropdown">
                                 <li v-if="user" class="sub-menu-user">
-                                    <div class="user-ava"><img src="img/account/user-ava-sm.jpg" alt="Daniel Adams">
+                                    <div class="user-ava"><img src="https://icotar.com/avatar/craig.png?s=200" :alt="user.name">
                                     </div>
                                     <div class="user-info">
                                         <h6 class="user-name">{{ user.name }}</h6><span class="text-xs text-muted">290 Reward points</span>
                                     </div>
                                 </li>
-
-                                <li v-if="!user"><a href="/login">Login</a></li>
-                                <li v-if="!user"><a href="/register">Register</a></li>
-                                <li v-if="user"><a href="account-wishlist.html">Wishlist</a></li>
-                                <li  v-if="user" class="sub-menu-separator"></li>
+                                <li :class="isActiveUrl('/login')" v-if="!user"><a href="/login">Login</a></li>
+                                <li :class="isActiveUrl('/register')" v-if="!user"><a href="/register">Register</a></li>
+                                <li :class="isActiveUrl('/account/wishlist')"  v-if="user"><a href="/account/wishlist">Wishlist</a></li>
+                                <li :class="isActiveUrl('/account/profile')" v-if="user"><a href="/account/profile">Profile</a></li>
+                                <li v-if="user" class="sub-menu-separator"></li>
                                 <li v-if="user"><a href="/logout"> <i class="icon-unlock"></i>Logout</a></li>
                             </ul>
                         </div>
                         <div class="cart"><a href="/cart"></a><i class="icon-bag"></i><span class="count">{{cartItems.length}}</span><span class="subtotal">N{{subTotalAmount | formatMoney}}</span>
-                            <div class="toolbar-dropdown">
-                                <div v-for="item in cartItems" class="dropdown-product-item">
-                                    <span class="dropdown-product-remove">
-                                        <i class="icon-cross"></i>
-                                    </span>
+                            <div  class="toolbar-dropdown">
+                                <div v-if="cartItems && cartItems.length > 0" v-for="item in cartItems" class="dropdown-product-item">
+                                <span class="dropdown-product-remove">
+                                    <i class="icon-cross"></i>
+                                </span>
                                     <a class="dropdown-product-thumb" :href="'/product/' + item.product.slug">
                                         <img class="cart_image" :src="item.product.front_image" alt="Product">
                                     </a>
@@ -349,14 +280,15 @@
                                         <span class="dropdown-product-details">{{item.quantity}} x N{{item.product_price | formatMoney}}</span>
                                     </div>
                                 </div>
-                                <div class="toolbar-dropdown-group">
+                                <div v-if="cartItems && cartItems.length > 0" class="toolbar-dropdown-group">
                                     <div class="column"><span class="text-lg">Total:</span></div>
                                     <div class="column text-right"><span class="text-lg text-medium">N{{subTotalAmount | formatMoney}}&nbsp;</span></div>
                                 </div>
-                                <div class="toolbar-dropdown-group">
+                                <div v-if="cartItems && cartItems.length > 0" class="toolbar-dropdown-group">
                                     <div class="column"><a class="btn btn-sm btn-block btn-secondary" href="/cart">View Cart</a></div>
                                     <div class="column"><a class="btn btn-sm btn-block btn-success" href="/checkout">Checkout</a></div>
                                 </div>
+                                <p class="text-center" style="margin-top: 10px" v-else>No Items in Cart</p>
                             </div>
                         </div>
                     </div>
@@ -376,15 +308,21 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
     name: "Navbar",
 
-    props: ['raw_user'],
+    props: ['raw_user', 'raw_url'],
 
     data(){
 
         return {
 
-            user: this.raw_user ? JSON.parse(this.raw_user) : null
+            user: this.raw_user ? JSON.parse(this.raw_user) : null,
+            url: JSON.parse(this.raw_url)
 
         }
+
+    },
+    async mounted() {
+
+        await this.getCategories({})
 
     },
 
@@ -392,7 +330,23 @@ export default {
         ...mapGetters({
             cartItems: 'cart/items',
             subTotalAmount: 'cart/subTotalAmount',
-        })
+            categories: 'shop/categories'
+        }),
+    },
+
+    methods: {
+
+        ...mapActions({
+
+            getCategories: 'shop/getCategories'
+
+        }),
+
+        isActiveUrl(url){
+            return this.url.base + url === this.url.current ? 'active' : ''
+        },
+
+
     }
 
 

@@ -17,6 +17,10 @@ interface ProductContract
 
     public function getTrendingProducts(int $num = 6);
 
+    public function getTopSellingProducts(int $num = 3);
+
+    public function getNewArrivalsProducts(int $num = 3);
+
     public function incrementProductViewCount(Product $product);
 
     public function getProductBy(array $data, array $relationship = []);

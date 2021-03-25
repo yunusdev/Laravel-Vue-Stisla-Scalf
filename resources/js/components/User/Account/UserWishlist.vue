@@ -1,10 +1,9 @@
 <template>
     <div class="container padding-bottom-3x mb-2">
         <div class="row">
-            <nav-account></nav-account>
+            <nav-account :user="user" :raw_url="raw_url"></nav-account>
             <div class="col-lg-8">
-                <h4>Wishlist</h4>
-                <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+                <h4 class="mt-3 mb-3">Wishlist</h4>
                 <div v-if="userWishlist.length > 0"  class="table-responsive wishlist-table margin-bottom-none">
                     <table class="table">
                         <thead>
@@ -61,7 +60,7 @@ class Address{
 export default {
     name: "UserAddress",
 
-    props: ['raw_user'],
+    props: ['raw_user', 'raw_url'],
 
     components: {NavAccount},
 

@@ -22,6 +22,6 @@
         </div>
     </div>
     <!-- Page Content-->
-    <view-user-order raw_order="{{$order}}"></view-user-order>
+    <view-user-order raw_order="{{$order}}" raw_url="{{$url}}" raw_user="{{auth()->user()}}"></view-user-order>
 
 @endsection
