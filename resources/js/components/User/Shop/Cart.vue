@@ -111,7 +111,7 @@ export default {
 
         store.commit('cart/setCouponData', null)
         store.commit('cart/setTotalFee', null)
-        await this.getUserCartItems()
+        // await this.getUserCartItems()
         await this.getTrendingProducts({})
 
     },

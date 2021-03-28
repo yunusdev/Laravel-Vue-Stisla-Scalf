@@ -24,6 +24,6 @@
     </div>
     <!-- Page Content-->
 
-    <checkout paystack_pk="{{$paystack_pk}}" raw_user="{{auth()->user()}}"></checkout>
+    <checkout paystack_pk="{{$paystack_pk}}" raw_user="{{$user}}"></checkout>
 
 @endsection

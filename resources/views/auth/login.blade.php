@@ -51,9 +51,18 @@
                     </div>
                     <p class="mt-3 mb-0 text-center">Or Register With</p>
                     <div class="row margin-bottom-1x">
-                        <div class="col-xl-4 col-md-6 col-sm-4"><a class="btn btn-sm btn-block facebook-btn" href="#"><i class="socicon-facebook"></i>&nbsp;Facebook login</a></div>
-                        <div class="col-xl-4 col-md-6 col-sm-4"><a class="btn btn-sm btn-block twitter-btn" href="#"><i class="socicon-twitter"></i>&nbsp;Twitter login</a></div>
-                        <div class="col-xl-4 col-md-6 col-sm-4"><a class="btn btn-sm btn-block google-btn" href="#"><i class="socicon-googleplus"></i>&nbsp;Google+ login</a></div>
+                        <div class="col-xl-4 col-md-6 col-sm-4">
+                            <a class="btn btn-sm btn-block google-btn" href="{{route('social.redirect', 'google')}}">
+                                <i class="socicon-googleplus"></i>&nbsp;Google+ login</a>
+                        </div>
+                        <div class="col-xl-4 col-md-6 col-sm-4">
+                            <a class="btn btn-sm btn-block facebook-btn" href="{{route('social.redirect', 'facebook')}}">
+                                <i class="socicon-facebook"></i>&nbsp;Facebook login</a>
+                        </div>
+                        <div class="col-xl-4 col-md-6 col-sm-4">
+                            <a class="btn btn-sm btn-block twitter-btn" href="{{route('social.redirect', 'twitter')}}">
+                                <i class="socicon-twitter"></i>&nbsp;Twitter login</a>
+                        </div>
                     </div>
                 </form>
             </div>

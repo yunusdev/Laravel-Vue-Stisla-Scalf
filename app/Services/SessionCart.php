@@ -69,6 +69,17 @@ class SessionCart
         $index = array_search($itemId, array_column($this->items, 'id'));
         if ($index >=  0) unset($this->items[$index]);
 
+//        foreach ($this->items as $key =>  $item){
+//
+//            if ($item['id'] === $itemId){
+//
+//                unset($this->items[$key]);
+//                break;
+//
+//            }
+//
+//        }
+
     }
 
 

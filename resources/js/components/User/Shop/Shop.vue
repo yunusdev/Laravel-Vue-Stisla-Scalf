@@ -166,6 +166,7 @@ export default {
 
     async mounted() {
 
+        // await this.getUserCartItems()
         await this.getCategories({})
 
     },
@@ -183,7 +184,7 @@ export default {
     methods: {
 
         ...mapActions({
-
+            // getUserCartItems: 'cart/getUserCartItems',
             getCategories: 'shop/getCategories'
 
         })

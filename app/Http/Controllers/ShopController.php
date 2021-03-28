@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\CategoryContract;
 use App\Contracts\ProductContract;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ShopController extends Controller
 {
@@ -19,9 +20,14 @@ class ShopController extends Controller
     }
 
     public function index(){
-
         $data['products'] = $this->productRepository->getProducts();
         return view('shop.index')->with($data);
+
+    }
+
+    public function session(){
+
+        return json_encode(Session::get('cart'));
 
     }
 

@@ -54,7 +54,19 @@
                 <hr class="mb-3">
                 <div class="d-flex flex-wrap justify-content-between">
                     <div class="entry-share mt-2 mb-2"><span class="text-muted">Share:</span>
-                        <div class="share-links"><a class="social-button shape-circle sb-facebook" href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="socicon-facebook"></i></a><a class="social-button shape-circle sb-twitter" href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="socicon-twitter"></i></a><a class="social-button shape-circle sb-instagram" href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="socicon-instagram"></i></a><a class="social-button shape-circle sb-google-plus" href="#" data-toggle="tooltip" data-placement="top" title="Google +"><i class="socicon-googleplus"></i></a></div>
+                        <div class="share-links">
+                            <a :href="`https://www.facebook.com/sharer/sharer.php?u=${this.current_url}&display=popup`" class="social-button shape-circle sb-facebook" data-toggle="tooltip" data-placement="top" title="Facebook">
+                                <i class="socicon-facebook"></i>
+                            </a>
+                            <a :href="`https://twitter.com/intent/tweet?url=${this.current_url}`" type="button" role="button" rel="noopener" class="social-button shape-circle sb-twitter" data-toggle="tooltip" data-placement="top" title="Twitter">
+                                <i class="socicon-twitter"></i></a>
+<!--                            <a class="social-button shape-circle sb-instagram" href="#" data-toggle="tooltip" data-placement="top" title="Instagram">-->
+<!--                                <i class="socicon-instagram"></i>-->
+<!--                            </a>-->
+<!--                            <a :href="`https://plus.google.com/share?url=${this.current_url}`" class="social-button shape-circle sb-google-plus" data-toggle="tooltip" data-placement="top" title="Google +">-->
+<!--                                <i class="socicon-googleplus"></i>-->
+<!--                            </a>-->
+                        </div>
                     </div>
                     <div class="sp-buttons mt-2 mb-2">
                         <wishlist :product="product"></wishlist>
@@ -90,7 +102,7 @@ export default {
 
     components: {AddToCart, Product, Wishlist},
 
-    props: ['raw_product', 'raw_related_products'],
+    props: ['raw_product', 'raw_related_products', 'current_url'],
 
     data(){
 

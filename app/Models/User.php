@@ -26,6 +26,8 @@ class User extends Authenticatable
         'phone',
         'email',
         'password',
+        'provider',
+        'provider_id',
     ];
 
     /**
@@ -47,6 +49,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+//    public function getAddressAttribute(){
+//
+//        return $this->address();
+//
+//    }
 
     public function address(){
 

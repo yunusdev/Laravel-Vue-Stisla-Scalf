@@ -15,6 +15,11 @@ export default {
 
         addOrRemoveWishlist(){
 
+            // if (!this.user){
+            //     this.notifError('You need to sign in before adding to your wishlist')
+            //     return;
+            // }
+
             const wishlist = !this.product.is_wishlisted
 
             this.$http.put(`/account/wishlist/product/${this.product.id}`, {wishlist}).then(async (res) => {
@@ -27,7 +32,8 @@ export default {
                 }
 
             }).catch(err => {
-                this.notifError( err.message || 'An error occurred')
+                this.notifError('You need to sign in before adding to your wishlist')
+                // this.notifError( err.message || 'An error occurred')
             })
 
 

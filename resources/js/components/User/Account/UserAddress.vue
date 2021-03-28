@@ -99,11 +99,15 @@ export default {
     async mounted() {
         await this.getCountries({})
         await this.getNigerianStates({})
-        this.userAddress = new Address(this.user.address)
-        const state = this.states.find((state) => state.name === this.user.address.state)
-        this.state = state
-        this.LGA = state.locals
-        this.userAddress.lga = this.user.address.lga
+        this.userAddress = new Address({})
+        if (this.user.address){
+            this.userAddress = new Address(this.user.address)
+            const state = this.states.find((state) => state.name === this.user.address.state)
+            this.state = state
+            this.LGA = state.locals
+            this.userAddress.lga = this.user.address.lga
+        }
+
     },
 
     computed: {
@@ -115,8 +119,12 @@ export default {
 
         isNigeria(){
 
-            if (!this.userAddress.country) return true
-            return this.userAddress.country && this.userAddress.country === 'Nigeria'
+            if (this.userAddress){
+                if (!this.userAddress.country) return true
+                return this.userAddress.country && this.userAddress.country === 'Nigeria'
+            }
+            return true;
+
         },
 
     },

@@ -54,9 +54,13 @@ export default {
     actions: {
         getUserCartItems({ state, commit }){
             return Axios.get(`/${baseUrl}/items`).then(res => {
-                console.log(res.data)
                 commit('setSubTotalAmount', parseInt(res.data.total_price))
-                commit('setCartItems', res.data.items)
+                let items = res.data.items
+                console.log(typeof items)
+                if(typeof items === 'object') {
+                    items = Object.values(items)
+                }
+                commit('setCartItems', items)
                 return res.data
             }).catch(err => {
                 return Promise.reject(err)
@@ -89,10 +93,6 @@ export default {
             })
 
         },
-
-
-
-
         removeItemFromCart({ state, commit }, itemId){
             return Axios.delete(`/${baseUrl}/remove/item/${itemId}`).then(res => {
                 commit('setSubTotalAmount', res.data.total_price)

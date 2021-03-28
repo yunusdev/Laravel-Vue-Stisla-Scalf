@@ -134,7 +134,7 @@
                         <div class="cart"><a href="/cart"></a><i class="icon-bag"></i><span class="count">{{totalQty}}</span><span class="subtotal">N{{subTotalAmount | formatMoney}}</span>
                             <div  class="toolbar-dropdown">
                                 <div v-if="cartItems && cartItems.length > 0" v-for="item in cartItems" class="dropdown-product-item">
-                                <span class="dropdown-product-remove">
+                                <span @click="removeItem(item)" class="cursor dropdown-product-remove">
                                     <i class="icon-cross"></i>
                                 </span>
                                     <a class="dropdown-product-thumb" :href="'/product/' + item.product.slug">
@@ -188,6 +188,7 @@ export default {
     },
     async mounted() {
 
+        await this.getUserCartItems()
         await this.getCategories({})
 
     },
@@ -205,10 +206,19 @@ export default {
     methods: {
 
         ...mapActions({
-
-            getCategories: 'shop/getCategories'
+            getUserCartItems: 'cart/getUserCartItems',
+            getCategories: 'shop/getCategories',
+            removeItemFromCart: 'cart/removeItemFromCart',
 
         }),
+
+        removeItem(item){
+            this.removeItemFromCart(item.id).then((data) => {
+                this.notifSuceess('Item Deleted successfully');
+            }).catch((err) => {
+                this.notifError( err.message || 'An error occurred')
+            })
+        },
 
         isActiveUrl(url){
             return this.url.base + url === this.url.current ? 'active' : ''

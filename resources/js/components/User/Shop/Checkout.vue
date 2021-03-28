@@ -150,8 +150,8 @@ class Order {
         this.email = order.email || ''
         this.phone = order.phone || '2349021333232'
         this.country = order.country || 'Nigeria'
-        this.state = order.state || 'Lagos'
-        this.lga = order.lga || 'Shomolu'
+        this.state = order.state || ''
+        this.lga = order.lga || ''
         this.address = order.address || 'Bajlulaiye'
 
     }
@@ -184,15 +184,28 @@ export default {
         this.getNigerianStates({})
         this.setDeliveryFee(0)
         this.setTotalFee(this.subTotalAmount - this.couponDiscount)
-        if (this.user) Object.assign(this.order, this.user)
-        this.getTopSellingProducts({num: 5})
+
+        if (this.user){
+            const user = this.user
+            const address =  this.user && this.user.address
+            console.log(user)
+            console.log(address)
+            Object.assign(this.order, {...user, ...address})
+            if (this.user.address){
+                const state = this.states.find((state) => state.name === this.user.address.state)
+                this.state = state
+                this.LGA = state.locals
+                this.order.lga = this.user.address.lga
+            }
+        }
+        this.getTopSellingProducts({num: 4})
 
     },
 
     watch: {
 
         'state': function (state){
-            this.order.lga = ''
+            // this.order.lga = ''
             if(state.name && state.locals){
                 this.order.state = state.name
                 this.LGA = state.locals

@@ -26,3 +26,18 @@
     padding-top: 0 !important;
     margin-bottom: 14px !important;
 }
+
+div.order-details h6{
+
+    font-weight: 200;
+    margin: 0;
+    padding-bottom: 5px;
+    font-size: 13px;
+}
+
+.cont{
+
+    font-weight: 400;
+
+    font-size: 15px;
+}

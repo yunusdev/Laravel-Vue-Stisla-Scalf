@@ -63,7 +63,10 @@ class OrderController extends Controller
             $inOrderItems = $request['items'];
 
             $order = $this->orderRepository->createUserOrder($inOrder);
-            if (!Auth::guest()) $this->accountRepository->updateOrCreateUserAddress($inOrder);
+            if (!Auth::guest()) {
+                $this->accountRepository->updateOrCreateUserAddress($inOrder);
+                $this->accountRepository->createOrUpdateUserPhone($inOrder);
+            }
             $orderItems = $this->orderItemRepository->createOrderItems($order, $inOrderItems);
             $this->cartRepository->clearUserCart();
             Cache::put('message_success', 'Order completed successfully!', now()->addSeconds(10));

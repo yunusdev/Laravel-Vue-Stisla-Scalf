@@ -52,7 +52,7 @@ Vue.component('coupons', require('./components/Admin/Coupons.vue').default);
 Vue.component('store-coupon', require('./components/Admin/StoreCoupon.vue').default);
 
 Vue.component('nav-bar', require('./components/User/Layout/Navbar.vue').default);
-Vue.component('shop', require('./components/User/Shop/Index.vue').default);
+Vue.component('shop', require('./components/User/Shop/Shop.vue').default);
 Vue.component('product-view', require('./components/User/Shop/ProductView.vue').default);
 Vue.component('carousel-products', require('./components/User/CarouselProducts.vue').default);
 Vue.component('cart', require('./components/User/Shop/Cart.vue').default);

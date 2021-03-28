@@ -48,7 +48,7 @@ class AccountController extends Controller
 
     public function address(){
 
-        $data['user'] = $this->accountRepository->getUserAddress();
+        $data['user'] = $this->accountRepository->getUserAndAddress();
 
         return view('account.address')->with($data);
 

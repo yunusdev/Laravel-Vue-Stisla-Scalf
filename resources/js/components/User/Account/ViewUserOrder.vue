@@ -4,6 +4,12 @@
             <nav-account :user="user" :raw_url="raw_url"></nav-account>
             <div class="col-lg-8">
                 <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+
+                <div class="text-center order-details">
+                    <h6><span class="cont">#{{order.tracking_number}}</span></h6>
+                    <h6><span class="cont">{{order.name}} | {{order.email}} | {{order.phone}}</span></h6>
+                    <h6><span class="cont">{{order.address}} | {{order.lga}} | {{order.state}}</span></h6>
+                </div>
                 <div class="table-responsive wishlist-table margin-bottom-none">
                     <table class="table">
                         <thead>
@@ -32,19 +38,19 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="text-lg text-medium"> <span>{{item.quantity}}</span> <span> X </span> N{{item.product_price | formatMoney}}</div>
+                                <div class="text-small"> <span>{{item.quantity}}</span> <span> X </span> N{{item.product_price | formatMoney}}</div>
                             </td>
                             <td>
-                                <div class="text-lg text-medium">N{{item.amount | formatMoney}}</div>
+                                <div class="text-small">N{{item.amount | formatMoney}}</div>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <div class=" float-right col-md-5">
-                        <section class="widget widget-order-summary">
+                    <div class="shopping-cart-footer  ">
+                        <section class="widget widget-order-summary col-md-5 float-right">
                             <table class="table">
                                 <tr>
-                                    <td>Cart Subtotal:</td>
+                                    <td>Subtotal:</td>
                                     <td class="text-medium">N{{order.sub_total_amount | formatMoney}}</td>
                                 </tr>
                                 <tr>
@@ -53,7 +59,7 @@
                                 </tr>
                                 <tr v-if="order.coupon_id">
                                     <td>Discount:</td>
-                                    <td class="text-small text-danger">{{order.coupon_discount}}% off</td>
+                                    <td class="text-small text-danger">- N{{order.coupon_discount | formatMoney}}</td>
                                 </tr>
 
                                 <tr>
@@ -62,26 +68,7 @@
                                 </tr>
                             </table>
                         </section>
-
-
-<!--                        <div class="column text-lg">-->
-<!--                        Subtotal: <span class="text-medium">N{{order.sub_total_amount | formatMoney}}</span>-->
-<!--                        Delivery Fee: <span class="text-medium">N{{order.delivery_fee | formatMoney}}</span>-->
-<!--                        <div class="mt-2 mb-2" v-if="order.coupon_id">-->
-<!--                            <span class="">Discount:-->
-<!--                                <span class="text-small text-danger">-->
-<!--                                    {{order.coupon_discount}}% off-->
-<!--                                </span>-->
-<!--                            </span>-->
-<!--                        </div>-->
-
-<!--                        <span class="">-->
-<!--                            Total Price: <span class="text-medium">N{{order.total_amount | formatMoney}}</span>-->
-<!--                        </span>-->
-<!--                    </div>-->
                     </div>
-
-
                 </div>
             </div>
         </div>

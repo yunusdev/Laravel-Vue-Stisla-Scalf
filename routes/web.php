@@ -4,9 +4,21 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/login/{provider}',
+    [App\Http\Controllers\SocialController::class, 'redirect']
+)->name('social.redirect');
+
+Route::get('/login/{provider}/callback',
+    [App\Http\Controllers\SocialController::class, 'callback']
+)->name('social.callback');
+
 Route::get('/',
     [App\Http\Controllers\HomeController::class, 'index']
 )->name('home');
+
+Route::get('/session',
+    [App\Http\Controllers\ShopController::class, 'session']
+);
 
 Route::group(['prefix' => 'shop'], function (){
 
@@ -31,7 +43,6 @@ Route::group(['prefix' => 'shop'], function (){
     );
 
 });
-
 
 Route::get('/category/{slug}/products',
     [App\Http\Controllers\CategoriesController::class, 'categoryProducts']

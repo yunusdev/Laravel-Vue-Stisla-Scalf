@@ -25,10 +25,13 @@ class AccountRepository implements AccountContract
 
     }
 
-    public function getUserAddress(string $userId = null)
+    public function getUserAndAddress(string $userId = null)
     {
         if (!$userId) $userId = auth()->id();
-        return  User::where('id', $userId)->with('address')->first();
+        Log::debug($userId);
+        $user = User::where('id', $userId)->first();
+        if ($user) $user['address'] = UserAddress::where('user_id', $userId)->first();
+        return  $user;
 
     }
 
@@ -88,6 +91,13 @@ class AccountRepository implements AccountContract
         if (!$userId) $userId = auth()->id();
         return UserAddress::updateOrCreate(['user_id' => $userId], $params);
 
+    }
+
+    public function createOrUpdateUserPhone(array $params, string $userId = null)
+    {
+        $user = auth()->user();
+        $user['phone'] = $params['phone'];
+        $user->save();
     }
 
 

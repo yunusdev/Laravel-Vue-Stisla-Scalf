@@ -22,6 +22,6 @@
         </div>
     </div>
     <!-- Page Content-->
-    <product-view raw_related_products="{{$related_products}}" raw_product="{{$product}}"></product-view>
+    <product-view current_url="{{url()->current()}}" raw_related_products="{{$related_products}}" raw_product="{{$product}}"></product-view>
 
 @endsection

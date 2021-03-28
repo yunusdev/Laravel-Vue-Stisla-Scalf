@@ -2,7 +2,6 @@
     <div class="grid-item">
         <div class="product-card">
             <a class="product-thumb" :href="'/product/' + product.slug">
-<!--                <img src="img/shop/products/02.jpg" alt="Product">-->
                 <img style="height: 145px" :src="product.front_image" alt="Product">
             </a>
             <h3 class="product-title"><a :href="'/product/' + product.slug">{{product.name}}</a></h3>
